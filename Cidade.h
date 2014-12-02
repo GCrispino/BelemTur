@@ -25,7 +25,7 @@ public:
 	void mostraBairros();
 	int calculaIdade();
 
-	Cidade operator =(const Cidade &);
+	Cidade operator +=(const Cidade &);
 };
 
 #endif // CIDADE_H

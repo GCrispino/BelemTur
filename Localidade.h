@@ -18,7 +18,7 @@ public:
 	virtual ~Localidade();
 
 
-	Localidade operator =(const Localidade &);
+	Localidade operator ==(const Localidade &);
 };
 
 #endif // LOCALIDADE_H

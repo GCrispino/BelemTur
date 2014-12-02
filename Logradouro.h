@@ -24,7 +24,7 @@ public:
 
 	void mostrarComentarios();
 
-	Logradouro operator =(const Logradouro &);
+	Logradouro operator +=(const Logradouro &);
 };
 
 #endif // LOGRADOURO_H

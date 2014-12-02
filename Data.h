@@ -29,7 +29,7 @@ private:
 	
 	
 
-
+	Data operator +=(const Data &);
 };
 
 #endif	/* DATA_H */

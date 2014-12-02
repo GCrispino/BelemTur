@@ -8,3 +8,7 @@ Moderador::~Moderador()
 {
 }
 
+void Moderador::cadastrar(){
+	
+}
+

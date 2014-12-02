@@ -110,5 +110,7 @@
     <File Name="Usuario.cpp"/>
     <File Name="Moderador.h"/>
     <File Name="Moderador.cpp"/>
+    <File Name="stringDigitos.cpp"/>
+    <File Name="stringDigitos.h"/>
   </VirtualDirectory>
 </CodeLite_Project>

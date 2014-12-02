@@ -22,7 +22,7 @@ public:
 	
 	void editarComentario();
 
-	Comentario operator =(const Comentario &);
+	Comentario operator +=(const Comentario &);
 };
 
 #endif // COMENTARIO_H

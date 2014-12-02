@@ -18,7 +18,7 @@ public:
 	void editarBairro(Bairro);
 	void editarComentario(Comentario);
 
-	Moderador operator =(const Moderador &);
+	Moderador operator +=(const Moderador &);
 };
 
 #endif // MODERADOR_H

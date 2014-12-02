@@ -19,7 +19,7 @@ public:
 	void mostrarPontos();
 	Logradouro buscaPonto();
 
-	Bairro operator =(const Bairro &);
+	Bairro operator +=(const Bairro &);
 };
 
 #endif // BAIRRO_H
