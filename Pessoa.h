@@ -8,7 +8,7 @@ using namespace std;
 
 class Pessoa
 {
-	friend ostream operator << (ostream &, const Pessoa &);
+	friend ostream &operator << (ostream &, const Pessoa &);
 protected:
 	string nome;
 	char sexo;

@@ -2,10 +2,29 @@
 #include <cstdlib>
 #include <time.h>
 
-Usuario::Usuario(const string &nome, char sexo, const string &cpf, const Data &nascimento, const string &username,const string &senha, const Bairro &B)
-:Pessoa(nome,sexo,cpf,nascimento)
-{
+ostream &operator << (ostream &output, const Usuario &U){
+	output<<static_cast<const Pessoa &>(U);
 	
+	output<<"Username: "<<U.username<<endl;
+	output<<"Data de cadastro: "<<U.datacadastro;
+	output<<"Bairro: "<<U.bairrouser.getNome();
+	
+	return output;
+}
+
+Usuario::Usuario(const string &nome, char sexo, const string &cpf, const Data &nascimento, const string &username,const string &senha, const Bairro &bairrouser)
+:Pessoa(nome,sexo,cpf,nascimento),bairrouser(bairrouser),username(username)
+{
+	this->username = validaUsername(username);
+	this->senha = validaSenha(senha);
+}
+
+Usuario::Usuario(const Usuario &U){
+	this->username = U.username;
+	this->senha = U.senha;
+	this->comentarios = U.comentarios;
+	this->datacadastro = U.datacadastro;
+	this->bairrouser = U.bairrouser;
 }
 
 Usuario::~Usuario()
@@ -35,3 +54,9 @@ string Usuario::validaUsername(const string &username){
 		
 }
 
+string Usuario::validaSenha(const string &senha){
+	if (senha.size() < 6)
+		return "123456";
+	else
+		return senha;
+}

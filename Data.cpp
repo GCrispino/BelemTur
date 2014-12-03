@@ -10,6 +10,11 @@
 #include <iostream>
 using std::cout;
 
+ostream &operator <<(ostream &output, const Data &D){
+	output << D.dia << '/' << D.mes << '/' << D.ano << endl;
+	
+	return output;
+}
 
 bool operator == (Data &d1, Data &d2){
 	if (d1.dia == d2.dia && d1.mes == d2.mes && d1.ano == d2.ano)

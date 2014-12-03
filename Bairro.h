@@ -5,13 +5,13 @@
 
 class Bairro : public Localidade
 {
-	friend ostream operator << (ostream &, const Bairro &);
+	friend ostream &operator << (ostream &, const Bairro &);
 	
 private:
 	vector <string> ruas;
 	vector <Logradouro> pontos;
 public:
-	Bairro(string nome = "", float area = -1);
+	Bairro(const string &nome = "", float area = -1);
 	Bairro(const Bairro &);
 	~Bairro();
 	

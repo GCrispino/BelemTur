@@ -4,13 +4,17 @@
  *
  * Created on 9 de Junho de 2012, 14:47
  */
+#include <iostream>
+
+using namespace std;
 
 #ifndef DATA_H
 #define	DATA_H
 
 class Data 
 {
-	
+
+friend ostream &operator << (ostream &,const Data &);
 friend bool operator == (Data &, Data &);
 	
 public:

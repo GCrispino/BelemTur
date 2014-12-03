@@ -10,17 +10,19 @@ using namespace std;
 
 class Logradouro: public Localidade
 {
-	friend ostream operator << (ostream &, const Logradouro &);
+	friend ostream &operator << (ostream &, const Logradouro &);
 	
 protected:
-	int cep;
+	string cep;
 	string rua;
 	string referencia;
 	vector <Comentario> comentarios;
 public:
-	Logradouro(int cep = 00000000, string rua = "", string referencia = "");
+	Logradouro(const string &nome = "", const string  &cep = "00000000", const string &rua = "", const string &referencia = "",float area = -1);
 	Logradouro(const Logradouro &);
 	virtual ~Logradouro();
+
+	static string validaCEP(const string &);
 
 	void mostrarComentarios();
 

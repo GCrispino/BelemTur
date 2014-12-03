@@ -1,12 +1,24 @@
 #include "Pessoa.h"
 
+ostream &operator << (ostream &output, const Pessoa &P){
+	output<<"Nome: "<<P.nome<<endl;
+	output<<"Sexo: "<<P.sexo<<endl;
+	output<<"CPF: "<<P.cpf<<endl;
+	output<<"Data de nascimento: "<<P.nascimento<<endl;
+	
+	return output;
+}
+
 Pessoa::Pessoa(const string &nome, char sexo, string cpf, const Data &nascimento)
 :sexo(sexo),nascimento(nascimento)
 {
 	this->nome = validaNome(nome);
 	
+	sexo = toupper(sexo);
 	if (sexo != 'M' && sexo != 'F')
 		this->sexo = '0';
+	else
+		this->sexo = sexo;
 	
 	this->cpf = validaCPF(cpf);
 }
@@ -29,13 +41,13 @@ Pessoa::~Pessoa()
 }
 
 string Pessoa::validaNome(const string &nome){
-	bool achoudigito = false;
+	bool achouinvalido = false;
 	
 	for (unsigned int i = 0;i < nome.size();i++)
-		if (isdigit(nome[i]))
-			achoudigito = true;
+		if (!isalpha(nome[i]) && !isspace(nome[i]))
+			achouinvalido = true;
 			
-	if (achoudigito)
+	if (achouinvalido || nome == "")
 		return "Padrao";
 	else
 		return nome;

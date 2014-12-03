@@ -10,7 +10,7 @@ using namespace std;
 
 class Usuario : public Pessoa
 {
-	friend ostream operator << (ostream &, const Usuario &);
+	friend ostream &operator << (ostream &, const Usuario &);
 protected:
 	string username;
 	string senha;
@@ -18,7 +18,7 @@ protected:
 	Data datacadastro;
 	Bairro bairrouser;
 public:
-	Usuario(const string &nome = "Padrao", char sexo = ' ', const string &cpf = "00000000000", const Data & = Data(1,1,1901), const string &username = "padrao",const string &senha = "000000", const Bairro & = Bairro(" ",-1));
+	Usuario(const string &nome = "Padrao", char sexo = ' ', const string &cpf = "00000000000", const Data & = Data(1,1,1901), const string &username = "usuario1",const string &senha = "000000", const Bairro &bairrouser = Bairro());
 	Usuario(const Usuario &);
 	virtual ~Usuario();
 
@@ -28,6 +28,7 @@ public:
 	void mostrarComentarios();
 	
 	static string validaUsername(const string &);
+	static string validaSenha(const string &);
 
 	Usuario operator +=(const Usuario &);
 };

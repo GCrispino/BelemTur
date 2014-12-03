@@ -7,10 +7,10 @@ using namespace std;
 
 class Moderador : public Usuario
 {
-	friend ostream operator << (ostream &, const Moderador &);
+	friend ostream &operator << (ostream &, const Moderador &);
 	
 public:
-	Moderador(string username = "padrao",string senha = "000000", Bairro = Bairro(" ",-1));
+	Moderador(const string &nome = "Padrao", char sexo = ' ', const string &cpf = "00000000000", const Data & = Data(1,1,1901), const string &username = "usuario1",const string &senha = "000000", const Bairro &bairrouser = Bairro());
 	Moderador(const Moderador &);
 	~Moderador();
 
