@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Crispino
-Date                   :=12/02/14
+Date                   :=12/03/14
 CodeLitePath           :="C:\Program Files (x86)\CodeLite"
 LinkerName             :=C:/MinGW-4.8.1/bin/g++.exe 
 SharedObjectLinkerName :=C:/MinGW-4.8.1/bin/g++.exe -shared -fPIC
@@ -64,7 +64,7 @@ AS       := C:/MinGW-4.8.1/bin/as.exe
 CodeLiteDir:=C:\Program Files (x86)\CodeLite
 UNIT_TEST_PP_SRC_DIR:=C:\UnitTest++-1.3
 Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/Localidade.cpp$(ObjectSuffix) $(IntermediateDirectory)/Cidade.cpp$(ObjectSuffix) $(IntermediateDirectory)/Bairro.cpp$(ObjectSuffix) $(IntermediateDirectory)/Data.cpp$(ObjectSuffix) $(IntermediateDirectory)/Logradouro.cpp$(ObjectSuffix) $(IntermediateDirectory)/Comentario.cpp$(ObjectSuffix) $(IntermediateDirectory)/Pessoa.cpp$(ObjectSuffix) $(IntermediateDirectory)/Usuario.cpp$(ObjectSuffix) $(IntermediateDirectory)/Moderador.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/stringDigitos.cpp$(ObjectSuffix) 
+	$(IntermediateDirectory)/stringDigitos.cpp$(ObjectSuffix) $(IntermediateDirectory)/PontoTuristico.cpp$(ObjectSuffix) 
 
 
 
@@ -178,6 +178,14 @@ $(IntermediateDirectory)/stringDigitos.cpp$(DependSuffix): stringDigitos.cpp
 
 $(IntermediateDirectory)/stringDigitos.cpp$(PreprocessSuffix): stringDigitos.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/stringDigitos.cpp$(PreprocessSuffix) "stringDigitos.cpp"
+
+$(IntermediateDirectory)/PontoTuristico.cpp$(ObjectSuffix): PontoTuristico.cpp $(IntermediateDirectory)/PontoTuristico.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Crispino/Documents/ProgII/BelemTur/PontoTuristico.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/PontoTuristico.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/PontoTuristico.cpp$(DependSuffix): PontoTuristico.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/PontoTuristico.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/PontoTuristico.cpp$(DependSuffix) -MM "PontoTuristico.cpp"
+
+$(IntermediateDirectory)/PontoTuristico.cpp$(PreprocessSuffix): PontoTuristico.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/PontoTuristico.cpp$(PreprocessSuffix) "PontoTuristico.cpp"
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

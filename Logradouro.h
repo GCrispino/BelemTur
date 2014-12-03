@@ -3,7 +3,7 @@
 #include <iostream>
 #include <vector>
 #include "Localidade.h"
-#include "Comentario.h"
+//#include "Comentario.h"
 
 using namespace std;
 
@@ -18,13 +18,13 @@ protected:
 	string referencia;
 	vector <Comentario> comentarios;
 public:
-	Logradouro(const string &nome = "", const string  &cep = "00000000", const string &rua = "", const string &referencia = "",float area = -1);
+	Logradouro(const string &nome = "", const string  &cep = "00000000", const string &rua = "", const string &referencia = "",float area = -1,string descricao = "");
 	Logradouro(const Logradouro &);
 	virtual ~Logradouro();
 
 	static string validaCEP(const string &);
 
-	void mostrarComentarios();
+	void mostrarComentarios() const;
 
 	Logradouro operator +=(const Logradouro &);
 };

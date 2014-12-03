@@ -9,17 +9,19 @@ using namespace std;
 
 class Cidade : public Localidade
 {
-	friend ostream operator << (ostream &, const Cidade &);
+	friend ostream &operator << (ostream &, const Cidade &);
 	
 private:
 	int nhabitantes;
 	Data fundacao;
 	vector <Bairro> bairros;
 public:
-	Cidade(string nome = "Padrao",int nhabitantes = -1, float area = -1, Data fundacao = Data(1,1,1901));
+	Cidade(string nome = "Padrao",int nhabitantes = -1, float area = -1, Data fundacao = Data(1,1,1901),string descricao = "");
 	Cidade(string nome,float area);
 	Cidade(const Cidade &);
 	~Cidade();
+
+	void mostrarComentarios() const;
 
 	void insereBairro(Bairro);
 	void mostraBairros();

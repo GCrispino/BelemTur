@@ -11,7 +11,13 @@
 using std::cout;
 
 ostream &operator <<(ostream &output, const Data &D){
-	output << D.dia << '/' << D.mes << '/' << D.ano << endl;
+	if (D.dia < 10)
+		output<<'0';
+	output<<D.dia<< '/';
+	if (D.mes < 10)
+		output<<'0';
+	output<<D.mes<< '/';
+	output<<D.ano << endl;
 	
 	return output;
 }
@@ -26,7 +32,7 @@ bool operator == (Data &d1, Data &d2){
 Data::Data(int d, int m, int a) 
 {
     if ( m > 0 && m <= 12 ) // validate the month
-        mes = m;
+		mes = m;
     
     if ( a < 0 )
         ano = 1900;

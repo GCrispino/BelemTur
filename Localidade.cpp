@@ -11,8 +11,8 @@ ostream &operator << (ostream &output, const Localidade &L){
 	return output;
 }
 
-Localidade::Localidade(string nome, float area)
-:area(area)
+Localidade::Localidade(string nome, float area,string descricao)
+:area(area),descricao(descricao)
 {
 	this->nome = validaNome(nome);
 	
@@ -34,13 +34,13 @@ string Localidade::getNome() const{
 }
 
 string Localidade::validaNome(const string &nome){
-	bool achoudigito = false;
+	bool achouinvalido = false;
 	
 	for (unsigned int i = 0;i < nome.size();i++)
-		if (isdigit(nome[i]))
-			achoudigito = true;
+		if (!isalpha(nome[i]) && !isspace(nome[i]))
+			achouinvalido = true;
 			
-	if (achoudigito)
+	if (achouinvalido || nome == "")
 		return "Cidade";
 	else
 		return nome;

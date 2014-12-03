@@ -1,0 +1,62 @@
+ifstream file;
+	file.open("arquivo.txt");
+	string line,s;
+	
+	string nome,cpf,username,senha,nomebairro;
+	char sexo;
+	int dia,mes,ano;
+	
+	int j;
+	
+	while(getline(file,line)){
+		j = 1;
+		for (unsigned int i = 0;i < line.size();i++){
+			if (line[i] != ' '){
+				s.push_back(line[i]);
+				if (i == line.size() - 1){
+					Bairro B(s);
+					cout<<B.getNome()<<endl;
+				}
+			}
+			else{
+				switch (j){
+					case 1:
+						nome = s;
+						cout<<flush<<nome<<endl;
+						break;
+					case 2:
+						sexo = s[0];
+						cout<<sexo<<endl;
+						break;
+					case 3:
+						cpf = s;
+						cout<<cpf<<endl;
+						break;
+					case 4:
+					{
+						dia = atoi((s.substr(0,2)).c_str());
+						mes = atoi((s.substr(2,2)).c_str());
+						ano = atoi((s.substr(4,4)).c_str());
+						Data D(dia,mes,ano);
+						cout<<D<<endl;
+					}
+						break;
+					case 5:
+						username = s;
+						cout<<username<<endl;
+						break;
+					case 6:
+						senha = s;
+						cout<<senha<<endl;
+						break;	
+				}
+				j++;
+				s.clear();
+			}
+		}
+		//Usuario U(nome,sexo,cpf,D,username,senha,B);
+	}
+	
+	//cout<<U;
+	
+	return 0;

@@ -13,8 +13,8 @@ ostream &operator << (ostream &output, const Bairro &B){
 	return output;
 }
 
-Bairro::Bairro(const string &nome, float area)
-:Localidade(nome,area)
+Bairro::Bairro(const string &nome, float area,string descricao)
+:Localidade(nome,area,descricao)
 {
 }
 
@@ -26,4 +26,8 @@ Bairro::Bairro(const Bairro &B)
 :Localidade(B){
 	this->ruas = B.ruas;
 	this->pontos = B.pontos;
+}
+
+void Bairro::mostrarComentarios() const{
+	
 }

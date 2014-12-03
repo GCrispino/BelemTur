@@ -112,5 +112,7 @@
     <File Name="Moderador.cpp"/>
     <File Name="stringDigitos.cpp"/>
     <File Name="stringDigitos.h"/>
+    <File Name="PontoTuristico.h"/>
+    <File Name="PontoTuristico.cpp"/>
   </VirtualDirectory>
 </CodeLite_Project>

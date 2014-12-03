@@ -11,9 +11,11 @@ private:
 	vector <string> ruas;
 	vector <Logradouro> pontos;
 public:
-	Bairro(const string &nome = "", float area = -1);
+	Bairro(const string &nome = "", float area = -1,string descricao = "");
 	Bairro(const Bairro &);
 	~Bairro();
+	
+	void mostrarComentarios() const;
 	
 	void inserePonto();
 	void mostrarPontos();

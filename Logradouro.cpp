@@ -1,8 +1,18 @@
 #include "Logradouro.h"
 #include "stringDigitos.h"
 
-Logradouro::Logradouro(const string &nome, const string &cep, const string &rua, const string &referencia, float area)
-:Localidade(nome,area),cep(cep),rua(rua),referencia(referencia)
+ostream &operator << (ostream &output, const Logradouro &L){
+	output<<static_cast<const Localidade &>(L);
+	output<<"Endereco: "<<endl;
+	output<<"   Rua: "<<L.rua;
+	output<<"   CEP: "<<L.cep;
+	output<<"   Referencia: "<<L.referencia;
+	
+	return output;
+}
+
+Logradouro::Logradouro(const string &nome, const string &cep, const string &rua, const string &referencia, float area, string descricao)
+:Localidade(nome,area,descricao),cep(cep),rua(rua),referencia(referencia)
 {
 	this->cep = validaCEP(cep);	
 }
@@ -19,6 +29,9 @@ Logradouro::~Logradouro()
 {
 }
 
+void Logradouro::mostrarComentarios() const{
+	
+}
 
 string Logradouro::validaCEP(const string &cep){
 	if (!stringDigitos(cep) || cep.size() != 8)
