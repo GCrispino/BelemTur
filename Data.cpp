@@ -8,6 +8,7 @@
 #include "Data.h"
 
 #include <iostream>
+#include <ctime>
 using std::cout;
 
 ostream &operator <<(ostream &output, const Data &D){
@@ -43,12 +44,6 @@ Data::Data(int d, int m, int a)
 
 }
 
-void Data::print() const
-{
-   cout << dia << '/' << mes << '/' << ano;
-   
-}
-
 int Data::VerificaDia(int diaTeste) const
 {
     static const int diasPorMes[ 13 ] = 
@@ -67,3 +62,14 @@ int Data::VerificaDia(int diaTeste) const
     
 }
 
+Data Data::getDataAtual() {
+    time_t t = time(0);   // get time now
+    struct tm * now = localtime( & t );
+    int ano = (now->tm_year + 1900);
+    int mes = (now->tm_mon + 1);
+	int dia = now->tm_mday;
+    
+	Data D(dia,mes,ano);
+	
+	return D;
+}

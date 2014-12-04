@@ -1,6 +1,8 @@
 #include "Usuario.h"
 #include <cstdlib>
 #include <time.h>
+#include <ctype.h>
+#include <conio.h>
 
 ostream &operator << (ostream &output, const Usuario &U){
 	output<<static_cast<const Pessoa &>(U);
@@ -31,8 +33,35 @@ Usuario::~Usuario()
 {
 }
 
+void Usuario::setUsername(const string &username){
+	this->username = validaUsername(username);
+}
+
 void Usuario::cadastrar(){
 	
+}
+
+void Usuario::editarComentario(Comentario &C){
+	char resposta;
+	string texto;
+	
+	if (this->username == C.getNomeUsuario()){
+		cout<<C<<endl;
+		cout<<"Deseja editar o comentario acima(S ou N)?"<<endl;
+		cin >> resposta;
+		resposta = toupper(resposta);
+		
+		if (resposta == 'S'){
+			cout<<"Digite o novo texto do comentario: "<<endl;
+			cin.sync();
+			getline(cin,texto);
+			C.setTexto(texto);
+		}
+	}
+	else{
+		cout<<"Voce so pode editar os seus comentarios!!"<<endl;
+		getch();
+	}
 }
 
 string Usuario::validaUsername(const string &username){
@@ -59,4 +88,12 @@ string Usuario::validaSenha(const string &senha){
 		return "123456";
 	else
 		return senha;
+}
+
+Usuario Usuario::operator +=(const Usuario &U){
+	//sobrecarga do operador "+=" na classe Usuário concatena o vector de comentário de uma instância com outra.
+	for (unsigned int i = 0;i < U.comentarios.size();i++)
+		this->comentarios.push_back(U.comentarios[i]);
+		
+	return *this;
 }

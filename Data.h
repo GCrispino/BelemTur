@@ -20,8 +20,8 @@ friend bool operator == (Data &, Data &);
 public:
     
     Data( int = 1, int = 1, int = 1900 );
-    
-    void print() const;
+	
+	static Data getDataAtual(); //retorna a data do sistema
 	
 private:
     
@@ -30,8 +30,6 @@ private:
     int ano;
     
     int VerificaDia( int ) const;
-	
-	
 
 	Data operator +=(const Data &);
 };

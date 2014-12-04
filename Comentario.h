@@ -11,17 +11,19 @@ class Comentario
 	friend ostream &operator << (ostream &, const Comentario &);
 	
 private:
-	string texto;
-	Data datacomentario;
-	string nomeusuario;
-	const static unsigned int QTDMAXCHAR;
+	string texto; //texto do comentário
+	Data datacomentario; //data em que o comentário foi criado
+	string nomeusuario; //username do usuário que fez o comentário
+	const static unsigned int QTDMAXCHAR; //quantidade máxima de caracteres que um comentário pode ter
 public:
 	Comentario(string texto = "", const Data &datacomentario = Data(1,1,1901),const string &nomeusuario = " ");
 	Comentario(string &texto, const string &nomeusuario);
 	Comentario(const Comentario &);
 	~Comentario();
 	
-	void editarComentario();
+	string getNomeUsuario();
+	void setTexto(string &);
+	
 
 	Comentario operator +=(const Comentario &);
 };

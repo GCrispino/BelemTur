@@ -17,6 +17,13 @@ Logradouro::Logradouro(const string &nome, const string &cep, const string &rua,
 	this->cep = validaCEP(cep);	
 }
 
+Logradouro::Logradouro(const string &rua,const string &nome, float area, const string &cep)
+:Localidade(nome,area),rua(rua)
+{
+	this->cep = validaCEP(cep);
+	this->referencia = "";
+}
+
 Logradouro::Logradouro(const Logradouro &L)
 :Localidade(L){
 	this->cep = L.cep;
@@ -38,4 +45,12 @@ string Logradouro::validaCEP(const string &cep){
 		return "00000000";
 	else
 		return cep;
+}
+
+Logradouro Logradouro::operator +=(const Logradouro &L){
+	//sobrecarga do operador "+=" na classe Usuário concatena o vector de comentário de uma instância com outra.
+	for (unsigned int i = 0;i < L.comentarios.size();i++)
+		this->comentarios.push_back(L.comentarios[i]);
+		
+	return *this;
 }

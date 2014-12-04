@@ -10,7 +10,17 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
-	Cidade C("Belem",287285,291387,Data(12,1,1616));
+	Usuario U;
+	U.setUsername("joaozinho");
+	Comentario C("Voces sabem qual eh a capital da Bielorussia?",Data::getDataAtual(),"610V4N1M");
+	Moderador M;
+	M.setUsername("joaozinho");
 	
-	cout<<C;
+	cout<<C<<endl;
+	
+	
+	U.editarComentario(C);
+	M.editarComentario(C);
+	
+	cout<<C<<endl;
 }

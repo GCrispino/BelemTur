@@ -18,9 +18,8 @@ Bairro::Bairro(const string &nome, float area,string descricao)
 {
 }
 
-Bairro::~Bairro()
-{
-}
+Bairro::Bairro(float area)
+:Localidade("Cidade",area){}
 
 Bairro::Bairro(const Bairro &B)
 :Localidade(B){
@@ -28,6 +27,19 @@ Bairro::Bairro(const Bairro &B)
 	this->pontos = B.pontos;
 }
 
+Bairro::~Bairro()
+{
+}
+
 void Bairro::mostrarComentarios() const{
 	
+}
+
+Bairro Bairro::operator +=(Bairro &B){
+	if (this->area == -1 || B.area == -1)
+		this->area++;
+		
+	this->area += B.area;
+	
+	return *this;
 }

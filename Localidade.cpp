@@ -1,7 +1,7 @@
 #include "Localidade.h"
 
 ostream &operator << (ostream &output, const Localidade &L){
-	output<<"Nome: "<<L.nome<<endl;
+	output<<L.nome<<endl;
 	output<<"Area: ";
 	if (L.area == -1)
 		output<<"indisponivel!";
@@ -20,13 +20,22 @@ Localidade::Localidade(string nome, float area,string descricao)
 		this->area = area;
 }
 
-Localidade::~Localidade()
-{
-}
-
 Localidade::Localidade(const Localidade &L){
 	this->area = L.area;
 	this->nome = L.nome;
+}
+
+Localidade::Localidade(float area){
+	if (area < 0)
+		this->area = -1;
+	else
+		this->area = area;
+		
+	this->nome = "Local";
+}
+
+Localidade::~Localidade()
+{
 }
 
 string Localidade::getNome() const{

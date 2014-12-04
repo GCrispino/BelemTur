@@ -22,7 +22,10 @@ public:
 	Usuario(const Usuario &);
 	virtual ~Usuario();
 
+	void setUsername(const string &);
+
 	virtual void cadastrar();
+	void editarComentario(Comentario &);
 	void comentar(Logradouro);
 	void atualizarCadastro();
 	void mostrarComentarios();

@@ -19,6 +19,7 @@ protected:
 	vector <Comentario> comentarios;
 public:
 	Logradouro(const string &nome = "", const string  &cep = "00000000", const string &rua = "", const string &referencia = "",float area = -1,string descricao = "");
+	Logradouro(const string &rua,const string &nome, float area, const string &cep);
 	Logradouro(const Logradouro &);
 	virtual ~Logradouro();
 

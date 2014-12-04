@@ -13,11 +13,12 @@ private:
 	Data fundacao;
 public:
 	PontoTuristico(const string &nome = "", const string  &cep = "00000000", const string &rua = "", const string &referencia = "",float area = -1,string descricao = "",const Data &fundacao = Data());
+	PontoTuristico(const string &rua,const string &nome, float area, const string &cep);
 	PontoTuristico(const PontoTuristico &);
 	~PontoTuristico();
 	
 	
-	
+	PontoTuristico operator +=(const PontoTuristico &);
 };
 
 #endif // PONTOTURISTICO_H

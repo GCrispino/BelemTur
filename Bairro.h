@@ -12,6 +12,7 @@ private:
 	vector <Logradouro> pontos;
 public:
 	Bairro(const string &nome = "", float area = -1,string descricao = "");
+	Bairro(float area);
 	Bairro(const Bairro &);
 	~Bairro();
 	
@@ -21,7 +22,7 @@ public:
 	void mostrarPontos();
 	Logradouro buscaPonto();
 
-	Bairro operator +=(const Bairro &);
+	Bairro operator +=(Bairro &);
 };
 
 #endif // BAIRRO_H

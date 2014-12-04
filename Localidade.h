@@ -11,9 +11,9 @@ class Localidade
 	friend ostream &operator << (ostream &, const Localidade &);
 	
 protected:
-	string nome;
-	float area;
-	string descricao;
+	string nome; //nome do local
+	float area; //área do local(em km²)
+	string descricao; //descrição do local
 	vector<Comentario> comentarios;
 public:
 	Localidade(string nome = "Local",float area = -1,string descricao = "");

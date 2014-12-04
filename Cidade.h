@@ -17,7 +17,7 @@ private:
 	vector <Bairro> bairros;
 public:
 	Cidade(string nome = "Padrao",int nhabitantes = -1, float area = -1, Data fundacao = Data(1,1,1901),string descricao = "");
-	Cidade(string nome,float area);
+	Cidade(const string &nome,float area);
 	Cidade(const Cidade &);
 	~Cidade();
 

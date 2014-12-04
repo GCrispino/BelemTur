@@ -13,6 +13,11 @@ PontoTuristico::PontoTuristico(const string &nome, const string &cep, const stri
 {
 }
 
+PontoTuristico::PontoTuristico(const string &rua,const string &nome, float area, const string &cep)
+:Logradouro(rua,nome,area,cep){
+	this->fundacao = Data();
+}
+
 PontoTuristico::PontoTuristico(const PontoTuristico &PT)
 :Logradouro(PT){
 	this->fundacao = PT.fundacao;
@@ -22,3 +27,9 @@ PontoTuristico::~PontoTuristico()
 {
 }
 
+PontoTuristico PontoTuristico::operator +=(const PontoTuristico &PT){
+	Logradouro L = static_cast<Logradouro &>(*this);
+	L += static_cast<const Logradouro &>(PT);
+	
+	return static_cast<PontoTuristico &>(L);
+}
