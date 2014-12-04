@@ -18,9 +18,9 @@ public:
 	
 	void mostrarComentarios() const;
 	
-	void inserePonto();
-	void mostrarPontos();
-	Logradouro buscaPonto();
+	void inserePonto(); //insere um objeto do tipo "Logradouro" no vector 'pontos'.
+	void mostrarPontos() const; //imprime todos os objetos contidos no vector 'pontos'.
+	Logradouro buscaPonto(); //busca e retorna um determinado ponto buscado.
 
 	Bairro operator +=(Bairro &);
 };

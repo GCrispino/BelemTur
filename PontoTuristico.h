@@ -17,6 +17,7 @@ public:
 	PontoTuristico(const PontoTuristico &);
 	~PontoTuristico();
 	
+	void mostrarComentarios() const;
 	
 	PontoTuristico operator +=(const PontoTuristico &);
 };

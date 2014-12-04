@@ -37,7 +37,10 @@ Cidade::~Cidade()
 }
 
 void Cidade::mostrarComentarios() const{
+	cout<<"Comentarios sobre a cidade de "<<this->nome<<": "<<endl;
 	
+	for (unsigned int i = 0;i < this->comentarios.size();i++)
+		cout<<"Comentario "<<i + 1<<endl<<comentarios[i]<<endl;
 }
 
 Cidade Cidade::operator +=(const Cidade &C){

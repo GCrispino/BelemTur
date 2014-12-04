@@ -37,7 +37,10 @@ Logradouro::~Logradouro()
 }
 
 void Logradouro::mostrarComentarios() const{
+	cout<<"Comentarios sobre o local "<<this->nome<<": "<<endl;
 	
+	for (unsigned int i = 0;i < this->comentarios.size();i++)
+		cout<<"Comentario "<<i + 1<<endl<<comentarios[i]<<endl;
 }
 
 string Logradouro::validaCEP(const string &cep){

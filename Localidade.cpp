@@ -1,8 +1,9 @@
 #include "Localidade.h"
 
 ostream &operator << (ostream &output, const Localidade &L){
-	output<<L.nome<<endl;
-	output<<"Area: ";
+	output<<"- "<<L.nome<<endl;
+	output<<endl<<"Descricao: "<<L.descricao<<endl;
+	output<<endl<<"Area: ";
 	if (L.area == -1)
 		output<<"indisponivel!";
 	else
