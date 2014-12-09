@@ -73,6 +73,7 @@ void Bairro::inserePonto(){
 	float area;
 	int rarea,pt,dia,mes,ano;
 	Data fundacao;
+	bool loop;
 	
 	cout<<"Digite 1 se o novo local a ser inserido e' um ponto turistico, ou qualquer outro numero caso contrario: "<<endl;
 	cin >> pt;
@@ -110,11 +111,14 @@ void Bairro::inserePonto(){
 	cin.sync();
 	getline(cin,rua);
 	
+	loop = true;
 	do{
 		cout<<"CEP: "<<endl;
 		cin >> cep;
-		if (cep == "0")
+		if (cep == "0"){
 			cep = "00000000";
+			loop = false;
+		}
 		else{
 			cep = Logradouro::validaCEP(cep);
 			if (cep == "00000000"){
@@ -122,7 +126,7 @@ void Bairro::inserePonto(){
 				getch();
 			}
 		}
-	}while(cep == "00000000");
+	}while(loop);
 	
 	cout<<"Referencia: "<<endl;
 	cin.sync();

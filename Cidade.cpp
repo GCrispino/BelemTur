@@ -143,6 +143,33 @@ Bairro * Cidade::buscaBairro(const string &nomebairro){
 	return 0;
 }
 
+void Cidade::buscaPonto(const string &nomeponto){
+	Logradouro *tmplog;
+	int cont;
+	bool achou = false;
+	vector <Logradouro *> ptrpontos;
+	
+	for (unsigned int i = 0;i < this->bairros.size();i++){
+		cont = 0;
+		tmplog = const_cast<Logradouro *>(this->bairros[i].buscaPonto(nomeponto));
+		
+		if (tmplog){
+			achou = true;
+			ptrpontos.push_back(tmplog);
+			cont++;
+			cout<<"Bairro: "<<this->bairros[i].getNome()<<": "<<endl;
+			cout<<cont<<". "<<tmplog->getNome();
+		}
+		getch();
+		
+	}
+	
+	if (!achou){
+		cout<<"Local nao encontrado!"<<endl;
+		getch();
+	}
+}
+
 int Cidade::calculaIdade(){
 	Data atual = Data::getDataAtual();
 	

@@ -138,6 +138,12 @@ int main(int argc, char **argv)
 										}while(opcaolocal != 1 && opcaolocal != 2);
 										break;
 									case 3:
+										cout<<"Digite o nome do local: "<<endl;
+										cin >> nomelocal;
+										
+										C.buscaPonto(nomelocal);
+										
+										
 										break;
 									case 4:
 										static_cast<Usuario &>(*usuarios[indiceusuario]).atualizarCadastro(&C);
@@ -181,7 +187,7 @@ int main(int argc, char **argv)
 	}while(opcaologin != 3);
 	
 	delete ptrU;
-	desaloca(usuarios);
+	//desaloca(usuarios);
 	
 	return 0;
 	/*vector<Usuario *> usuarios;
