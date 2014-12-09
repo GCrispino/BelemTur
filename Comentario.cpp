@@ -1,4 +1,5 @@
 #include "Comentario.h"
+#include "Usuario.h"
 
 const unsigned int Comentario::QTDMAXCHAR = 140;
 
@@ -51,6 +52,13 @@ string Comentario::getNomeUsuario(){
 	return this->nomeusuario;
 }
 
+void Comentario::setNomeUsuario(const string &nomeusuario){
+	this->nomeusuario = Usuario::validaUsername(nomeusuario);
+}
+
+string Comentario::getTexto() const{
+	return this->texto;
+}
 
 void Comentario::setTexto(string &texto){
 	if (texto.size() > QTDMAXCHAR)
@@ -63,6 +71,14 @@ Comentario Comentario::operator +=(const Comentario &C){
 	//concatena o texto dos dois comentários
 	this->texto.push_back(' ');
 	this->texto.append(C.texto);
+	
+	return *this;
+}
+
+Comentario Comentario::operator =(const Comentario &C){
+	this->texto = C.texto;
+	this->datacomentario = C.datacomentario;
+	this->nomeusuario = C.nomeusuario;
 	
 	return *this;
 }

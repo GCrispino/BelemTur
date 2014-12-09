@@ -21,6 +21,10 @@ public:
     
     Data( int = 1, int = 1, int = 1900 );
 	
+	int getDia();
+	int getMes();
+	int getAno();
+	
 	static Data getDataAtual(); //retorna a data do sistema
 	
 private:

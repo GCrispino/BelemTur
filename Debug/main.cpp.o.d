@@ -1,5 +1,5 @@
 Debug/main.cpp.o: main.cpp Moderador.h Usuario.h Pessoa.h Data.h \
- stringDigitos.h Comentario.h Bairro.h Localidade.h Logradouro.h Cidade.h
+ stringDigitos.h Cidade.h Localidade.h Comentario.h Bairro.h Logradouro.h
 
 Moderador.h:
 
@@ -11,12 +11,12 @@ Data.h:
 
 stringDigitos.h:
 
+Cidade.h:
+
+Localidade.h:
+
 Comentario.h:
 
 Bairro.h:
 
-Localidade.h:
-
 Logradouro.h:
-
-Cidade.h:

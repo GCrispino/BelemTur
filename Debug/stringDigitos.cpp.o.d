@@ -1,1 +1,3 @@
-Debug/stringDigitos.cpp.o: stringDigitos.cpp
+Debug/stringDigitos.cpp.o: stringDigitos.cpp stringDigitos.h
+
+stringDigitos.h:

@@ -16,17 +16,27 @@ protected:
 	string descricao; //descrição do local
 	vector<Comentario> comentarios;
 public:
-	Localidade(string nome = "Local",float area = -1,string descricao = "");
-	Localidade(float area);
+	Localidade(string nome = "Local",float area = -1,const string &descricao = "");
+	Localidade(float area, const string &descricao);
 	Localidade(const Localidade &L);
 	virtual ~Localidade();
 
 	//getters e setters
 	string getNome() const;
+	void setNome(string &);
+	float getArea() const;
+	void setArea(float);
+	string getDescricao() const;
+	void setDescricao(const string &);
+	Comentario getComentario(int indice) const;
+	void setComentario(int indice,const Comentario &);
 	
 	virtual void mostrarComentarios() const = 0;
+	void insereComentario(const Comentario &);
+	//função que atualiza o nome de usuário em um comentário quando este é modificado nos dados de um determinado usuário.
+	virtual void atualizaComentarios(const string &, string &); 
 
-	string validaNome(const string &);
+	static string validaNome(const string &);
 };
 
 #endif // LOCALIDADE_H

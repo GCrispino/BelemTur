@@ -5,6 +5,7 @@
 #include "Pessoa.h"
 #include "Comentario.h"
 #include "Bairro.h"
+#include "Cidade.h"
 
 using namespace std;
 
@@ -22,14 +23,29 @@ public:
 	Usuario(const Usuario &);
 	virtual ~Usuario();
 
+	string getUsername() const;
 	void setUsername(const string &);
-
-	virtual void cadastrar();
-	void editarComentario(Comentario &);
-	void comentar(Logradouro);
-	void atualizarCadastro();
-	void mostrarComentarios();
+	void setSenha(const string &);
+	//void setComentario(const string &);
+	void setBairro(const Bairro &);
+	void setDataCadastro(const Data &);
+	string getNomeBairro() const;
+	void setNomeBairro(const string &);
+	Comentario getComentario(int indice) const;
+	void setComentario(int indice,const Comentario &);
+	int getNComentarios() const;
 	
+
+	virtual void cadastrar(const Cidade &,vector <Pessoa *> &);
+	void editarComentario();
+	void comentar(Localidade *);
+	void atualizarCadastro(Cidade *);
+	void mostrarComentarios() const;
+	void atualizaComentarios(const string &,string &);
+	void atualizaNomeBairro(const string &, string &);
+	
+	bool verificaSenha(const string &) const;
+	static int buscaUsername(const string &, const vector<Pessoa *> &);
 	static string validaUsername(const string &);
 	static string validaSenha(const string &);
 

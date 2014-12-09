@@ -4,12 +4,13 @@
 #include "Localidade.h"
 #include "Data.h"
 #include "Bairro.h"
+//#include "Usuario.h"
 
 using namespace std;
 
 class Cidade : public Localidade
 {
-	friend ostream &operator << (ostream &, const Cidade &);
+	friend ostream &operator << (ostream &, Cidade &);
 	
 private:
 	int nhabitantes;
@@ -21,11 +22,17 @@ public:
 	Cidade(const Cidade &);
 	~Cidade();
 
-	void mostrarComentarios() const;
+	Bairro getBairro(int indice);
+	void setBairro(int indice, const Bairro &);
 
-	void insereBairro(Bairro);
-	void mostraBairros();
-	int calculaIdade();
+	void mostrarComentarios() const;
+	void atualizaComentarios(const string &,string &);
+	//void atualizaComentarios(const string &, const Bairro &);
+
+	void insereBairro(const Bairro &);
+	void mostraBairros() const;
+	Bairro * buscaBairro(const string &);
+	int calculaIdade(); //calcula a idade da cidade baseado na data do sistema
 
 	Cidade operator +=(const Cidade &);
 };

@@ -2,6 +2,7 @@
 #define MODERADOR_H
 #include <iostream> 
 #include "Usuario.h"
+#include "Cidade.h"
 
 using namespace std;
 
@@ -14,9 +15,11 @@ public:
 	Moderador(const Moderador &);
 	~Moderador();
 
-	void cadastrar();
-	void editarBairro(Bairro);
+	//void cadastrar(const Cidade &);
+	void editarBairro(Bairro *,vector<Usuario *> &);
+	void editarPonto(Logradouro &,vector<Usuario *> &);
 	void editarComentario(Comentario &);
+	void editarComentario(Usuario &, const string &,const string &);
 
 	Moderador operator +=(const Moderador &);
 };

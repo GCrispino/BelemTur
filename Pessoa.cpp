@@ -2,7 +2,14 @@
 
 ostream &operator << (ostream &output, const Pessoa &P){
 	output<<"Nome: "<<P.nome<<endl;
-	output<<"Sexo: "<<P.sexo<<endl;
+	output<<"Sexo: ";
+	if (P.sexo == 'M')
+		cout<<"masculino";
+	else if (P.sexo == 'F')
+		cout<<"feminino";
+	else
+		cout<<"indisponivel";
+	cout<<". "<<endl;
 	output<<"CPF: "<<P.cpf<<endl;
 	output<<"Data de nascimento: "<<P.nascimento<<endl;
 	
@@ -14,11 +21,7 @@ Pessoa::Pessoa(const string &nome, char sexo, string cpf, const Data &nascimento
 {
 	this->nome = validaNome(nome);
 	
-	sexo = toupper(sexo);
-	if (sexo != 'M' && sexo != 'F')
-		this->sexo = '0';
-	else
-		this->sexo = sexo;
+	this->setSexo(sexo);
 	
 	this->cpf = validaCPF(cpf);
 }
@@ -38,6 +41,23 @@ Pessoa::Pessoa(const Pessoa &P){
 
 Pessoa::~Pessoa()
 {
+}
+
+void Pessoa::setNome(const string &nome){
+	this->nome = validaNome(nome);
+}
+void Pessoa::setSexo(char sexo){
+	sexo = toupper(sexo);
+	if (sexo != 'M' && sexo != 'F')
+		this->sexo = '0';
+	else
+		this->sexo = sexo;
+}
+void Pessoa::setCPF(const string &cpf){
+	this->cpf = validaCPF(cpf);
+}
+void Pessoa::setNascimento(const Data &D){
+	this->nascimento = D;
 }
 
 string Pessoa::validaNome(const string &nome){

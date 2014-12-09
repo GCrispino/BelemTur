@@ -16,13 +16,20 @@ public:
 	Bairro(const Bairro &);
 	~Bairro();
 	
-	void mostrarComentarios() const;
+	void setRua(int,const string &);
+	void setPonto(int, const Logradouro &);
 	
+	void mostrarComentarios() const;
+	void atualizaComentarios(const string &, string &);
+	
+	void insereRua(const string &); //insere uma rua nova no vector das principais ruas do bairro.
 	void inserePonto(); //insere um objeto do tipo "Logradouro" no vector 'pontos'.
 	void mostrarPontos() const; //imprime todos os objetos contidos no vector 'pontos'.
-	Logradouro buscaPonto(); //busca e retorna um determinado ponto buscado.
+	const Logradouro* buscaPonto(const string &); //busca e retorna um determinado ponto buscado.
+	void mostraPrincipaisRuas() const; //imprime os valores do vector 'ruas'.
 
-	Bairro operator +=(Bairro &);
+	Bairro operator +=(const Bairro &);
+	Bairro operator =(const Bairro &);
 };
 
 #endif // BAIRRO_H

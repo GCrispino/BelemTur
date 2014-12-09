@@ -22,10 +22,13 @@ public:
 	~Comentario();
 	
 	string getNomeUsuario();
+	void setNomeUsuario(const string &);
 	void setTexto(string &);
+	string getTexto() const;
 	
 
 	Comentario operator +=(const Comentario &);
+	Comentario operator =(const Comentario &);
 };
 
 #endif // COMENTARIO_H

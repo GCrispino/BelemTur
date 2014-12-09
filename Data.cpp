@@ -9,6 +9,7 @@
 
 #include <iostream>
 #include <ctime>
+#include <conio.h>
 using std::cout;
 
 ostream &operator <<(ostream &output, const Data &D){
@@ -44,6 +45,19 @@ Data::Data(int d, int m, int a)
 
 }
 
+
+int Data::getDia(){
+	return this->dia;
+}
+
+int Data::getMes(){
+	return this->mes;
+}
+
+int Data::getAno(){
+	return this->ano;
+}
+
 int Data::VerificaDia(int diaTeste) const
 {
     static const int diasPorMes[ 13 ] = 
@@ -57,6 +71,7 @@ int Data::VerificaDia(int diaTeste) const
         return diaTeste;
     
     cout << "Dia invalido (" << diaTeste << ") configurado para 1.\n";
+	getch();
     return 1; 
 
     

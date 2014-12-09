@@ -33,11 +33,39 @@ Bairro::~Bairro()
 {
 }
 
-void Bairro::mostrarComentarios() const{
-	cout<<"Comentarios sobre o bairro "<<this->nome<<": "<<endl;
+void Bairro::setRua(int indice,const string &rua){
+	if (indice >= 1 && (unsigned int) indice <= this->ruas.size())
+		this->ruas[indice - 1] = rua;
+	else
+		return ;
+}
+
+void Bairro::setPonto(int indice, const Logradouro &L){
 	
-	for (unsigned int i = 0;i < this->comentarios.size();i++)
-		cout<<"Comentario "<<i + 1<<endl<<comentarios[i]<<endl;
+}
+
+void Bairro::mostrarComentarios() const{
+	if (this->comentarios.empty()){
+		cout<<"Nao ha nenhum comentario!"<<endl;
+		getch();
+	}
+	else{
+		cout<<"Comentarios sobre o bairro "<<this->nome<<": "<<endl;
+		
+		for (unsigned int i = 0;i < this->comentarios.size();i++)
+			cout<<"Comentario "<<i + 1<<endl<<comentarios[i]<<endl;
+	}
+}
+
+void Bairro::atualizaComentarios(const string &username,string &novousername){
+	Localidade::atualizaComentarios(username,novousername);
+	
+	for (unsigned int i = 0;i < this->pontos.size();i++)
+		this->pontos[i].atualizaComentarios(username,novousername);
+}
+
+void Bairro::insereRua(const string &rua){
+	this->ruas.push_back(rua);
 }
 
 void Bairro::inserePonto(){
@@ -46,7 +74,7 @@ void Bairro::inserePonto(){
 	int rarea,pt,dia,mes,ano;
 	Data fundacao;
 	
-	cout<<"Digite 1 se o novo local a ser inserido e' um ponto turistico: "<<endl;
+	cout<<"Digite 1 se o novo local a ser inserido e' um ponto turistico, ou qualquer outro numero caso contrario: "<<endl;
 	cin >> pt;
 	cout<<"Digite o nome do novo local a ser salvo: "<<endl;
 	cin.sync();
@@ -63,7 +91,7 @@ void Bairro::inserePonto(){
 		cout<<endl;
 		fundacao = Data(dia,mes,ano);
 	}
-	cout<<"Caso deseje informar a area do novo local, digite 1"<<endl;
+	cout<<"Caso deseje informar a area do novo local, digite 1. Caso nao queira, digite outro numero: "<<endl;
 	cin >> rarea;
 	
 	if (rarea == 1){
@@ -77,11 +105,25 @@ void Bairro::inserePonto(){
 	getline(cin,descricao);
 	
 	cout<<"--Endereco--"<<endl;
+	
 	cout<<"Rua: "<<endl;
 	cin.sync();
 	getline(cin,rua);
-	cout<<"CEP: "<<endl;
-	cin >> cep;
+	
+	do{
+		cout<<"CEP: "<<endl;
+		cin >> cep;
+		if (cep == "0")
+			cep = "00000000";
+		else{
+			cep = Logradouro::validaCEP(cep);
+			if (cep == "00000000"){
+				cout<<"CEP invalido! Caso nao saiba o CEP, defina o CEP do local como 0."<<endl;
+				getch();
+			}
+		}
+	}while(cep == "00000000");
+	
 	cout<<"Referencia: "<<endl;
 	cin.sync();
 	getline(cin,referencia);
@@ -117,17 +159,42 @@ void Bairro::mostrarPontos() const{
 			return ;
 		}
 		else{
-			cout<<this->pontos[indice];
+			cout<<this->pontos[indice - 1];
 			getch();
 		}
 	}
 }
 
-Bairro Bairro::operator +=(Bairro &B){
+const Logradouro* Bairro::buscaPonto(const string &nomePonto){
+	for (unsigned int i = 0;i < this->pontos.size();i++)
+		if (this->pontos[i].getNome() == nomePonto)
+			return &(this->pontos[i]);
+	
+	return 0;
+}
+
+void Bairro::mostraPrincipaisRuas() const{
+	cout<<"Principais ruas do bairro "<<this->nome<<": "<<endl;
+	for (unsigned int i = 0;i < this->ruas.size();i++)
+		cout<<i + 1<<". "<<this->ruas[i]<<"."<<endl;
+}
+
+Bairro Bairro::operator +=(const Bairro &B){
 	if (this->area == -1 || B.area == -1)
 		this->area++;
 		
 	this->area += B.area;
+	
+	return *this;
+}
+
+Bairro Bairro::operator =(const Bairro &B){
+	this->area = B.area;
+	this->nome = B.nome;
+	this->descricao = B.descricao;
+	this->comentarios = B.comentarios;
+	this->ruas = B.ruas;
+	this->pontos = B.pontos;
 	
 	return *this;
 }

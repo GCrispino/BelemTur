@@ -13,8 +13,8 @@ PontoTuristico::PontoTuristico(const string &nome, const string &cep, const stri
 {
 }
 
-PontoTuristico::PontoTuristico(const string &rua,const string &nome, float area, const string &cep)
-:Logradouro(rua,nome,area,cep){
+PontoTuristico::PontoTuristico(const string &rua,const string &nome, float area, const string &cep,const string &descricao)
+:Logradouro(rua,nome,area,cep,descricao){
 	this->fundacao = Data();
 }
 

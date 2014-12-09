@@ -3,6 +3,7 @@
 #include <iostream>
 #include "Data.h"
 #include "stringDigitos.h"
+#include "Cidade.h"
 
 using namespace std;
 
@@ -20,7 +21,13 @@ public:
 	Pessoa(const Pessoa &);
 	virtual ~Pessoa();
 
-	virtual void cadastrar() = 0;
+	virtual void cadastrar(const Cidade &,vector <Pessoa *> &) = 0;
+
+	//getters e setters
+	void setNome(const string &);
+	void setSexo(char);
+	void setCPF(const string &);
+	void setNascimento(const Data &);
 
 	static int validaIdade(int idade);
 	static string validaNome(const string &nome);
