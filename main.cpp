@@ -139,8 +139,10 @@ int main(int argc, char **argv)
 										break;
 									case 3:
 										cout<<"Digite o nome do local: "<<endl;
-										cin >> nomelocal;
+										cin.sync();
+										getline(cin,nomelocal);
 										
+										cout<<"Resultados: "<<endl;
 										C.buscaPonto(nomelocal);
 										
 										

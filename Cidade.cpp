@@ -145,26 +145,36 @@ Bairro * Cidade::buscaBairro(const string &nomebairro){
 
 void Cidade::buscaPonto(const string &nomeponto){
 	Logradouro *tmplog;
-	int cont;
+	int cont,nponto;
 	bool achou = false;
 	vector <Logradouro *> ptrpontos;
 	
 	for (unsigned int i = 0;i < this->bairros.size();i++){
-		cont = 0;
+		//cont = 0;
 		tmplog = const_cast<Logradouro *>(this->bairros[i].buscaPonto(nomeponto));
 		
 		if (tmplog){
 			achou = true;
 			ptrpontos.push_back(tmplog);
-			cont++;
+			//cont++;
 			cout<<"Bairro: "<<this->bairros[i].getNome()<<": "<<endl;
-			cout<<cont<<". "<<tmplog->getNome();
+			cout<<ptrpontos.size()<<". "<<tmplog->getNome();
 		}
-		getch();
-		
 	}
 	
-	if (!achou){
+	if (achou){
+		getch();
+		do{
+			cout<<"Selecione o numero do ponto que voce deseja visualizar: "<<endl;
+			cin >> nponto;
+			if (nponto < 1 || nponto > ptrpontos.size()){
+				cout<<"Opcao invalida!"<<endl;
+				getch();
+			}
+		}while(nponto < 1 || nponto > ptrpontos.size());
+		cout<<ptrpontos[nponto]<<endl;
+	}
+	else{
 		cout<<"Local nao encontrado!"<<endl;
 		getch();
 	}
