@@ -173,6 +173,7 @@ void Cidade::buscaPonto(const string &nomeponto){
 			}
 		}while(nponto < 1 || nponto > ptrpontos.size());
 		cout<<ptrpontos[nponto]<<endl;
+		getch();
 	}
 	else{
 		cout<<"Local nao encontrado!"<<endl;
