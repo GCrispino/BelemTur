@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 	string username,senha,nomebairro,nomelocal,descricao,rua;
 	bool usuario;
 	
-	Usuario *ptrU = new Usuario("Joao",'m',"12345675895",Data(1,1,2001),"joaozinho123","123456"),*ptrTempU;
+	Usuario *ptrU = new Usuario("Joao",'m',"12345675895",Data(1,1,2001),"joaozinho123","360HD3D"),*ptrTempU;
 	Moderador *ptrM;
 	usuarios.push_back(ptrU);
 	ptrU = new Moderador("Gabriel Nunes Crispino",'m',"00991867211",Data(19,11,1995),"GCrispino","12161820");
@@ -93,18 +93,22 @@ int main(int argc, char **argv)
 											system("cls");
 											cout<<"Voce escolheu o bairro: "<<C.getBairro(opcaobairro).getNome()<<endl;
 											cout<<"Escolha uma opcao: "<<endl;
-											cout<<"1. Listar os locais registrados do bairro: "<<endl;
-											cout<<"2. Mostrar os comentarios feitos sobre o bairro: "<<endl;
-											cout<<"3. Fazer um comentario sobre o bairro: "<<endl;
-											cout<<"4. Voltar: "<<endl;
+											cout<<"1. Mostrar as informacoes do bairro: "<<endl;
+											cout<<"2. Listar os locais registrados do bairro: "<<endl;
+											cout<<"3. Mostrar os comentarios feitos sobre o bairro: "<<endl;
+											cout<<"4. Fazer um comentario sobre o bairro: "<<endl;
+											cout<<"5. Voltar: "<<endl;
 											if (typeid(*usuarios[indiceusuario]) == typeid(Moderador)){
 												cout<<"--OPCOES RESTRITAS A MODERADORES--"<<endl;
-												cout<<"5. Editar bairro: ";
+												cout<<"6. Editar bairro: ";
 											}
 											cin >> opcaomenubairro;
 											
 											switch(opcaomenubairro){
 												case 1:
+													cout<<C.getBairro(opcaobairro);
+													break;
+												case 2:
 													system("cls");
 													tmp = C.getBairro(opcaobairro);
 													ptrM = dynamic_cast<Moderador *>(usuarios[indiceusuario]);
@@ -120,19 +124,19 @@ int main(int argc, char **argv)
 													//C.getBairro(opcaobairro).setPonto(opcaobairro,*tmpponto);
 													C.setBairro(opcaobairro,tmp);
 													break;
-												case 2:
+												case 3:
 													tmp = C.getBairro(opcaobairro);
 													tmp.mostrarComentarios();
 													getch();
 													break;
-												case 3:
+												case 4:
 													tmp = C.getBairro(opcaobairro);
 													static_cast<Usuario *>(usuarios[indiceusuario])->comentar(&tmp);
 													C.setBairro(opcaobairro,tmp);
 													break;
-												case 4:
-													break;
 												case 5:
+													break;
+												case 6:
 													if (typeid(*usuarios[indiceusuario]) == typeid(Moderador)){
 														tmp = C.getBairro(opcaobairro);
 														static_cast<Moderador *>(usuarios[indiceusuario])->editarBairro(&tmp,usuarios);
@@ -149,7 +153,7 @@ int main(int argc, char **argv)
 													getch();
 													break;
 											}
-										}while(opcaomenubairro != 4);
+										}while(opcaomenubairro != 5);
 										break;
 									case 2:
 										do{
