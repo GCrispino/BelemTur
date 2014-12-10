@@ -6,6 +6,7 @@
 #include "Comentario.h"
 #include "Bairro.h"
 #include "Cidade.h"
+#include "Logradouro.h"
 
 using namespace std;
 
@@ -43,6 +44,10 @@ public:
 	void mostrarComentarios() const;
 	void atualizaComentarios(const string &,string &);
 	void atualizaNomeBairro(const string &, string &);
+	//função que permite ao usuário visualizar e interagir com os pontos de um bairro .
+	void acessaPontos(Bairro &);
+	//busca determinado ponto cujo nome é passado como parametro e possibilita o usuário a executar diversas ações.
+	void buscaPonto(Cidade &,const string &); 
 	
 	bool verificaSenha(const string &) const;
 	static int buscaUsername(const string &, const vector<Pessoa *> &);

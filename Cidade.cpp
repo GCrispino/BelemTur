@@ -38,11 +38,22 @@ Cidade::~Cidade()
 {
 }
 
-Bairro Cidade::getBairro(int indice){
+int Cidade::getNBairros() const{
+	return this->bairros.size();
+}
+
+Bairro Cidade::getBairro(int indice) const{
 	if (indice >= 1 && (unsigned int) indice <= this->bairros.size())
 		return this->bairros[indice - 1];
 	else
 		return Bairro();
+}
+
+const Bairro * Cidade::getBairro(unsigned int indice) const{
+	if (indice >= 1 && (unsigned int) indice <= this->bairros.size())
+		return &(this->bairros[indice - 1]);
+	else
+		return 0;
 }
 
 void Cidade::setBairro(int indice, const Bairro &B){
@@ -143,9 +154,9 @@ Bairro * Cidade::buscaBairro(const string &nomebairro){
 	return 0;
 }
 
-void Cidade::buscaPonto(const string &nomeponto){
+void Cidade::buscaPonto(bool usuario, const string &nomeponto){
 	Logradouro *tmplog;
-	int cont,nponto;
+	int nponto,opcao;
 	bool achou = false;
 	vector <Logradouro *> ptrpontos;
 	
@@ -153,12 +164,12 @@ void Cidade::buscaPonto(const string &nomeponto){
 		//cont = 0;
 		tmplog = const_cast<Logradouro *>(this->bairros[i].buscaPonto(nomeponto));
 		
-		if (tmplog){
+		if (tmplog != 0){
 			achou = true;
 			ptrpontos.push_back(tmplog);
 			//cont++;
 			cout<<"Bairro: "<<this->bairros[i].getNome()<<": "<<endl;
-			cout<<ptrpontos.size()<<". "<<tmplog->getNome();
+			cout<<ptrpontos.size()<<". "<</*tmplog->getNome()*/ptrpontos[ptrpontos.size() - 1]->getNome()<<endl;
 		}
 	}
 	
@@ -167,13 +178,44 @@ void Cidade::buscaPonto(const string &nomeponto){
 		do{
 			cout<<"Selecione o numero do ponto que voce deseja visualizar: "<<endl;
 			cin >> nponto;
-			if (nponto < 1 || nponto > ptrpontos.size()){
+			if (nponto < 1 || (unsigned int)nponto > ptrpontos.size()){
 				cout<<"Opcao invalida!"<<endl;
 				getch();
 			}
-		}while(nponto < 1 || nponto > ptrpontos.size());
-		cout<<ptrpontos[nponto]<<endl;
-		getch();
+		}while(nponto < 1 || (unsigned int)nponto > ptrpontos.size());
+		
+		do{
+			cout<<*ptrpontos[nponto - 1]<<endl<<endl;
+			cout<<"Digite uma opcao: "<<endl;
+			cout<<"1. Fazer um comentario sobre o local: "<<endl;
+			cout<<"2. Visualizar todos os comentarios sobre o local: "<<endl;
+			cout<<"3. Voltar"<<endl;
+			if (usuario)
+				cout<<"4. Editar local: "<<endl;
+				
+			cin >> opcao;
+			
+			switch(opcao){
+				case 1:
+					//ptrpontos[nponto - 1].comentar();
+					break;
+				case 2:
+					ptrpontos[nponto - 1]->mostrarComentarios();
+					getch();
+					break;
+				case 3:
+					break;
+				case 4:
+					if (usuario){
+						
+					}
+					break;
+				default:
+					cout<<"Opcao invalida!"<<endl;
+					getch();
+					break;
+			}
+		}while(opcao != 3);
 	}
 	else{
 		cout<<"Local nao encontrado!"<<endl;

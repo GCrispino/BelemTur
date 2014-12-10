@@ -19,7 +19,7 @@ ostream &operator <<(ostream &output, const Data &D){
 	if (D.mes < 10)
 		output<<'0';
 	output<<D.mes<< '/';
-	output<<D.ano << endl;
+	output<<D.ano;
 	
 	return output;
 }

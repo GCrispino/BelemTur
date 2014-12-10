@@ -17,6 +17,8 @@ public:
 	~Bairro();
 	
 	void setRua(int,const string &);
+	int getNPontos() const;
+	const Logradouro * getPonto(int indice);
 	void setPonto(int, const Logradouro &);
 	
 	void mostrarComentarios() const;

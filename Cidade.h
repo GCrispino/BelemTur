@@ -22,7 +22,9 @@ public:
 	Cidade(const Cidade &);
 	~Cidade();
 
-	Bairro getBairro(int indice);
+	int getNBairros() const;
+	Bairro getBairro(int indice) const;
+	const Bairro *getBairro(unsigned int indice) const;
 	void setBairro(int indice, const Bairro &);
 
 	void mostrarComentarios() const;
@@ -32,7 +34,7 @@ public:
 	void insereBairro(const Bairro &);
 	void mostraBairros() const;
 	Bairro * buscaBairro(const string &);
-	void buscaPonto(const string &); //busca e retorna um determinado ponto buscado.
+	void buscaPonto(bool, const string &); //busca e retorna um determinado ponto buscado.
 	int calculaIdade(); //calcula a idade da cidade baseado na data do sistema
 
 	Cidade operator +=(const Cidade &);

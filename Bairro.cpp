@@ -40,6 +40,17 @@ void Bairro::setRua(int indice,const string &rua){
 		return ;
 }
 
+int Bairro::getNPontos() const{
+	return this->pontos.size();
+}
+
+const Logradouro * Bairro::getPonto(int indice){
+	if (indice >= 1 && (unsigned int) indice <= this->pontos.size())
+		return &this->pontos[indice - 1];
+	else
+		return 0;
+}
+
 void Bairro::setPonto(int indice, const Logradouro &L){
 	
 }
@@ -139,8 +150,6 @@ void Bairro::inserePonto(){
 }
 
 void Bairro::mostrarPontos() const{
-	int indice;
-	
 	if (this->pontos.empty()){
 		cout<<"Nao ha nenhum ponto registrado no bairro!"<<endl;
 		getch();
@@ -150,22 +159,8 @@ void Bairro::mostrarPontos() const{
 	
 		for (unsigned int i = 0;i < this->pontos.size();i++)
 			cout<<i + 1<<". "<<this->pontos[i].getNome()<<endl;
-	
-		cout<<endl<<"Caso deseje visualizar informacoes de um determinado ponto, digite o seu numero correspondente no indice"<<endl;
-		cout<<"Caso contrario, digite 0."<<endl;
-		cin >> indice;
-	
-		if (!indice)
-			return ;
-		else if (indice < 0 || (unsigned int)indice - 1 >= this->pontos.size()){
-			cout<<"Valor invalido!"<<endl;
-			getch();
-			return ;
-		}
-		else{
-			cout<<this->pontos[indice - 1];
-			getch();
-		}
+		getch();
+		
 	}
 }
 

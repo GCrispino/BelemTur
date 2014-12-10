@@ -28,6 +28,7 @@ public:
 	void setArea(float);
 	string getDescricao() const;
 	void setDescricao(const string &);
+	int getNComentarios() const;
 	Comentario getComentario(int indice) const;
 	void setComentario(int indice,const Comentario &);
 	

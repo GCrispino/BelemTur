@@ -25,14 +25,17 @@ int main(int argc, char **argv)
 {
 	//Cidade C("Belem",1432844,1065,Data(6,12,1616),descricao);
 	Cidade C = leArquivoCidade();
-	Bairro *ptrBairro,*tmpbairro;
+	Bairro *ptrBairro,*tmpbairro,tmp;
 	Logradouro *tmplocal;
+	const Logradouro *tmpponto;
 	vector <Pessoa *> usuarios;
-	int opcaologin,opcaoprincipal,opcaolocal,indiceusuario,nruas;
+	int opcaologin,opcaoprincipal,opcaolocal,opcaobairro,opcaobairrolocal,opcaomenubairro,indiceusuario,nruas;
 	float areabairro,arealocal;
 	string username,senha,nomebairro,nomelocal,descricao,rua;
+	bool usuario;
 	
-	Usuario *ptrU = new Usuario("Joao",'m',"12345675895",Data(1,1,2001),"joaozinho123","123456");
+	Usuario *ptrU = new Usuario("Joao",'m',"12345675895",Data(1,1,2001),"joaozinho123","123456"),*ptrTempU;
+	Moderador *ptrM;
 	usuarios.push_back(ptrU);
 	ptrU = new Moderador("Gabriel Nunes Crispino",'m',"00991867211",Data(19,11,1995),"GCrispino","12161820");
 	usuarios.push_back(ptrU);
@@ -70,7 +73,64 @@ int main(int argc, char **argv)
 								
 								switch(opcaoprincipal){
 									case 1:
-										C.mostraBairros();
+										do{
+											C.mostraBairros();
+											cin >> opcaobairro;
+											if (opcaobairro < 0 || opcaobairro > C.getNBairros()){
+												cout<<"Opcao invalida!"<<endl;
+												getch();
+											}
+										}while(opcaobairro < 1 || opcaobairro > C.getNBairros());
+										if (!opcaobairro)
+											break;
+											
+										do{
+											system("cls");
+											cout<<"Voce escolheu o bairro: "<<C.getBairro(opcaobairro).getNome()<<endl;
+											cout<<"Escolha uma opcao: "<<endl;
+											cout<<"1. Listar os locais registrados do bairro: "<<endl;
+											cout<<"2. Mostrar os comentarios feitos sobre o bairro: "<<endl;
+											cout<<"3. Fazer um comentario sobre o bairro: "<<endl;
+											cout<<"4. Voltar: "<<endl;
+											if (typeid(*usuarios[indiceusuario]) == typeid(Moderador)){
+												cout<<"--OPCOES RESTRITAS A MODERADORES--"<<endl;
+												cout<<"5. Editar bairro: ";
+											}
+											cin >> opcaomenubairro;
+											
+											switch(opcaomenubairro){
+												case 1:
+													system("cls");
+													tmp = C.getBairro(opcaobairro);
+													static_cast<Usuario *>(usuarios[indiceusuario])->acessaPontos(tmp);
+													//tmp.mostrarPontos();
+													//cin >> opcaobairrolocal;
+													//tmpponto = C.getBairro(opcaobairro).getPonto(opcaobairrolocal);
+													//static_cast<Usuario *>(usuarios[indiceusuario])->buscaPonto(C,tmpponto->getNome());
+													
+													//C.getBairro(opcaobairro).setPonto(opcaobairro,*tmpponto);
+													C.setBairro(opcaobairro,tmp);
+													break;
+												case 2:
+													tmp = C.getBairro(opcaobairro);
+													tmp.mostrarComentarios();
+													getch();
+													break;
+												case 3:
+													tmp = C.getBairro(opcaobairro);
+													static_cast<Usuario *>(usuarios[indiceusuario])->comentar(&tmp);
+													C.setBairro(opcaobairro,tmp);
+													break;
+												case 4:
+													break;
+												case 5:
+													break;
+												default:
+													cout<<"Opcao invalida!"<<endl;
+													getch();
+													break;
+											}
+										}while(opcaomenubairro != 4);
 										break;
 									case 2:
 										do{
@@ -79,7 +139,7 @@ int main(int argc, char **argv)
 											if (opcaolocal == 1){
 												ptrBairro = new Bairro();
 												do{
-													cout<<"Digite o nome do bairo: "<<endl;
+													cout<<"Digite o nome do bairro: "<<endl;
 													cin >> nomebairro;
 													tmpbairro = C.buscaBairro(nomebairro);
 													if (tmpbairro){
@@ -106,7 +166,7 @@ int main(int argc, char **argv)
 												nruas = 0;
 												do{
 													cout<<"Entre com as principais ruas do bairro(digite 0 quando quiser parar): "<<endl;
-													cout<<"Rua "<<nruas<<": "<<endl;
+													cout<<"Rua "<<nruas + 1<<": "<<endl;
 													cin.sync();
 													getline(cin,rua);
 													if (rua == "0")
@@ -142,8 +202,14 @@ int main(int argc, char **argv)
 										cin.sync();
 										getline(cin,nomelocal);
 										
-										cout<<"Resultados: "<<endl;
-										C.buscaPonto(nomelocal);
+										cout<<"Resultados: "<<endl;;
+										ptrM = dynamic_cast<Moderador *>(usuarios[indiceusuario]);
+										if (ptrM)
+											ptrM->buscaPonto(C,nomelocal,usuarios);
+										else{
+											ptrTempU = dynamic_cast<Usuario *>(usuarios[indiceusuario]);
+											ptrTempU->buscaPonto(C,nomelocal);
+										}
 										
 										
 										break;

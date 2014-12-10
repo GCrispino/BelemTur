@@ -17,7 +17,9 @@ public:
 
 	//void cadastrar(const Cidade &);
 	void editarBairro(Bairro *,vector<Usuario *> &);
-	void editarPonto(Logradouro &,vector<Usuario *> &);
+	void editarPonto(Logradouro &,vector<Pessoa *> &);
+	//busca determinado ponto cujo nome é passado como parametro e possibilita o usuário a executar diversas ações.
+	void buscaPonto(Cidade &,const string &,vector<Pessoa *> &);
 	void editarComentario(Comentario &);
 	void editarComentario(Usuario &, const string &,const string &);
 

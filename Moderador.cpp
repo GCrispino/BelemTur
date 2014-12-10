@@ -1,5 +1,6 @@
 #include "Moderador.h"
 #include <conio.h>
+#include <cstdlib>
 
 ostream &operator << (ostream &output, const Moderador &M){
 	output<<"--USUARIO MODERADOR--"<<endl;
@@ -133,11 +134,12 @@ void Moderador::editarBairro(Bairro *B,vector<Usuario *> &usuarios){
 	}while(opcao != 7);
 }
 
-void Moderador::editarPonto(Logradouro &L,vector<Usuario *> &usuarios){
+void Moderador::editarPonto(Logradouro &L,vector<Pessoa *> &usuarios){
 	int opcao,ncomentario;
 	float area;
 	string descricao,cep,rua,referencia,nomelocal;
 	Comentario comentantigo,comentnovo;
+	Usuario *ptrU;
 	
 	cout<<"Informacoes do local a ser editado: "<<endl;
 	getch();
@@ -205,20 +207,35 @@ void Moderador::editarPonto(Logradouro &L,vector<Usuario *> &usuarios){
 				L.setDescricao(descricao);
 				break;
 			case 4:
-				L.mostrarComentarios();
-				
-				cout<<"Digite o numero do comentario que deseja editar: "<<endl;
-				cin >> ncomentario;
-				
-				//modifica o comentario dentro do objeto B do tipo Bairro
-				comentantigo = L.getComentario(ncomentario);
-				comentnovo = comentantigo;
-				this->editarComentario(comentnovo);
-				L.setComentario(ncomentario,comentnovo);
-				
-				for (unsigned int i = 0;i < usuarios.size();i++) //atualiza com o texto novo os comentários de todos os usuários
-					if(usuarios[i]->getUsername() == comentantigo.getNomeUsuario())
-						this->editarComentario(*usuarios[i],comentantigo.getTexto(),comentnovo.getTexto());
+				if (L.getNComentarios() > 0){
+					L.mostrarComentarios();
+					
+					do{
+						cout<<"Digite o numero do comentario que deseja editar: "<<endl;
+						cin >> ncomentario;
+						if (ncomentario < 1 || ncomentario > L.getNComentarios()){
+							cout<<"Opcao invalida!"<<endl;
+							getch();
+						}
+					}while(ncomentario < 1 || ncomentario > L.getNComentarios());
+					
+					//modifica o comentario dentro do objeto B do tipo Bairro
+					comentantigo = L.getComentario(ncomentario);
+					comentnovo = comentantigo;
+					this->editarComentario(comentnovo);
+					L.setComentario(ncomentario,comentnovo);
+					
+					for (unsigned int i = 0;i < usuarios.size();i++){ //atualiza com o texto novo os comentários de todos os usuários
+						ptrU = dynamic_cast<Usuario *>(usuarios[i]);
+						if(ptrU && ptrU->getUsername() == comentantigo.getNomeUsuario())
+							this->editarComentario(*ptrU,comentantigo.getTexto(),comentnovo.getTexto());
+					}
+					
+				}
+				else{
+					cout<<"O local nao tem nenhum comentario!"<<endl;
+					getch();
+				}
 				break;
 			case 5:
 				do{
@@ -234,14 +251,16 @@ void Moderador::editarPonto(Logradouro &L,vector<Usuario *> &usuarios){
 				break;
 			case 6:
 				cout<<"Digite o novo nome da rua do local '"<<L.getNome()<<"'. "<<endl;
-				cin >> rua;
+				cin.sync();
+				getline(cin,rua);
 				cout<<"Rua modificada de '"<<L.getRua()<<"' para '"<<rua<<"'. "<<endl;
 				getch();
 				L.setRua(rua);
 				break;
 			case 7:
 				cout<<"Digite a nova referencia do local '"<<L.getNome()<<"'. "<<endl;
-				cin >> referencia;
+				cin.sync();
+				getline(cin,referencia);
 				cout<<"Referencia modificada de '"<<L.getReferencia()<<"' para '"<<referencia<<"'. "<<endl;
 				getch();
 				L.setReferencia(referencia);
@@ -255,6 +274,72 @@ void Moderador::editarPonto(Logradouro &L,vector<Usuario *> &usuarios){
 		}
 	}while(opcao != 8);
 	
+}
+
+void Moderador::buscaPonto(Cidade &C,const string &nomeponto,vector<Pessoa *> &usuarios){
+	Logradouro *tmplog;
+	int nponto,opcao;
+	bool achou = false;
+	vector <Logradouro *> ptrpontos;
+	
+	for (int i = 1;i <= C.getNBairros();i++){
+		tmplog = const_cast<Logradouro *>(const_cast<Bairro *>(C.getBairro((unsigned int)i))->buscaPonto(nomeponto));
+		
+		if (tmplog != 0){
+			achou = true;
+			ptrpontos.push_back(tmplog);
+			//cont++;
+			cout<<"Bairro: "<<C.getBairro(i).getNome()<<": "<<endl;
+			cout<<ptrpontos.size()<<". "<</*tmplog->getNome()*/ptrpontos[ptrpontos.size() - 1]->getNome()<<endl;
+		}
+	}
+	
+	if (achou){
+		getch();
+		do{
+			cout<<"Selecione o numero do ponto que voce deseja visualizar: "<<endl;
+			cin >> nponto;
+			if (nponto < 1 || (unsigned int)nponto > ptrpontos.size()){
+				cout<<"Opcao invalida!"<<endl;
+				getch();
+			}
+		}while(nponto < 1 || (unsigned int)nponto > ptrpontos.size());
+		
+		do{
+			system("cls");
+			cout<<*ptrpontos[nponto - 1]<<endl<<endl;
+			cout<<"Digite uma opcao: "<<endl;
+			cout<<"1. Fazer um comentario sobre o local: "<<endl;
+			cout<<"2. Visualizar todos os comentarios sobre o local: "<<endl;
+			cout<<"3. Voltar"<<endl;
+			cout<<"--OPCOES RESTRITAS A MODERADORES--"<<endl;
+			cout<<"4. Editar informacoes do local: "<<endl;
+			cin >> opcao;
+			
+			switch(opcao){
+				case 1:
+					this->comentar(ptrpontos[nponto - 1]);
+					break;
+				case 2:
+					ptrpontos[nponto - 1]->mostrarComentarios();
+					getch();
+					break;
+				case 3:
+					break;
+				case 4:
+					this->editarPonto(*ptrpontos[nponto - 1],usuarios);
+					break;
+				default:
+					cout<<"Opcao invalida!"<<endl;
+					getch();
+					break;
+			}
+		}while(opcao != 3);
+	}
+	else{
+		cout<<"Local nao encontrado!"<<endl;
+		getch();
+	}
 }
 
 void Moderador::editarComentario(Comentario &C){

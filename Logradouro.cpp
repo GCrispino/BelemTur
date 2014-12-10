@@ -1,5 +1,6 @@
 #include "Logradouro.h"
 #include "stringDigitos.h"
+#include <conio.h>
 
 ostream &operator << (ostream &output, const Logradouro &L){
 	output<<static_cast<const Localidade &>(L);
@@ -69,10 +70,16 @@ void Logradouro::setReferencia(const string &referencia){
 }
 
 void Logradouro::mostrarComentarios() const{
-	cout<<"Comentarios sobre o local "<<this->nome<<": "<<endl;
-	
-	for (unsigned int i = 0;i < this->comentarios.size();i++)
-		cout<<"Comentario "<<i + 1<<endl<<comentarios[i]<<endl;
+	if (this->comentarios.empty()){
+		cout<<"Nao ha nenhum comentario sobre o local "<<this->nome<<"! "<<endl;
+		getch();
+	}
+	else{
+		cout<<"Comentarios sobre o local "<<this->nome<<": "<<endl;
+		
+		for (unsigned int i = 0;i < this->comentarios.size();i++)
+			cout<<"Comentario "<<i + 1<<endl<<comentarios[i]<<endl;
+	}
 }
 
 string Logradouro::validaNome(const string &nome){

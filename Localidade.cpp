@@ -47,6 +47,10 @@ string Localidade::getNome() const{
 		return this->nome;
 }
 
+int Localidade::getNComentarios() const{
+	return this->comentarios.size();
+}
+
 Comentario Localidade::getComentario(int indice) const{
 	if (indice >= 1 && (unsigned int) indice <= this->comentarios.size())
 		return this->comentarios[indice - 1];

@@ -426,6 +426,116 @@ void Usuario::atualizaNomeBairro(const string &nomebairro,string &novonomebairro
 		this->bairrouser.setNome(novonomebairro);
 }
 
+void Usuario::acessaPontos(Bairro &B){
+	int indice,opcao;
+	Logradouro *tmp;
+	
+	B.mostrarPontos();
+	
+	cout<<endl<<"Caso deseje visualizar informacoes de um determinado ponto, digite o seu numero correspondente no indice"<<endl;
+	cout<<"Caso contrario, digite 0."<<endl;
+	cin >> indice;
+	
+		if (!indice)
+			return ;
+		else if (indice < 0 || indice - 1 >= B.getNPontos()){
+			cout<<"Valor invalido!"<<endl;
+			getch();
+			return ;
+		}
+		else{
+			do{
+				tmp = const_cast<Logradouro *>(B.getPonto(indice));
+				//cout<<this->pontos[nponto - 1]<<endl<<endl;
+				cout<<*tmp<<endl<<endl;
+				cout<<"Digite uma opcao: "<<endl;
+				cout<<"1. Fazer um comentario sobre o local: "<<endl;
+				cout<<"2. Visualizar todos os comentarios sobre o local: "<<endl;
+				cout<<"3. Voltar"<<endl;
+					
+				cin >> opcao;
+				
+				switch(opcao){
+					case 1:
+						this->comentar(tmp);
+						break;
+					case 2:
+						tmp->mostrarComentarios();
+						getch();
+						break;
+					case 3:
+						break;
+					default:
+						cout<<"Opcao invalida!"<<endl;
+						getch();
+						break;
+				}
+				B.setPonto(indice,*tmp);
+			}while(opcao != 3);
+	}
+}
+
+void Usuario::buscaPonto(Cidade &C,const string &nomeponto){
+	Logradouro *tmplog;
+	int nponto,opcao;
+	bool achou = false;
+	vector <Logradouro *> ptrpontos;
+	
+	for (int i = 1;i <= C.getNBairros();i++){
+		tmplog = const_cast<Logradouro *>(const_cast<Bairro *>(C.getBairro((unsigned int)i))->buscaPonto(nomeponto));
+		
+		if (tmplog != 0){
+			achou = true;
+			ptrpontos.push_back(tmplog);
+			//cont++;
+			cout<<"Bairro: "<<C.getBairro(i).getNome()<<": "<<endl;
+			cout<<ptrpontos.size()<<". "<</*tmplog->getNome()*/ptrpontos[ptrpontos.size() - 1]->getNome()<<endl;
+		}
+	}
+	
+	if (achou){
+		getch();
+		do{
+			cout<<"Selecione o numero do ponto que voce deseja visualizar: "<<endl;
+			cin >> nponto;
+			if (nponto < 1 || (unsigned int)nponto > ptrpontos.size()){
+				cout<<"Opcao invalida!"<<endl;
+				getch();
+			}
+		}while(nponto < 1 || (unsigned int)nponto > ptrpontos.size());
+		
+		do{
+			cout<<*ptrpontos[nponto - 1]<<endl<<endl;
+			cout<<"Digite uma opcao: "<<endl;
+			cout<<"1. Fazer um comentario sobre o local: "<<endl;
+			cout<<"2. Visualizar todos os comentarios sobre o local: "<<endl;
+			cout<<"3. Voltar"<<endl;
+				
+			cin >> opcao;
+			
+			switch(opcao){
+				case 1:
+					this->comentar(ptrpontos[nponto - 1]);
+					break;
+				case 2:
+					ptrpontos[nponto - 1]->mostrarComentarios();
+					getch();
+					break;
+				case 3:
+					break;
+				default:
+					cout<<"Opcao invalida!"<<endl;
+					getch();
+					break;
+			}
+		}while(opcao != 3);
+	}
+	else{
+		cout<<"Local nao encontrado!"<<endl;
+		getch();
+	}
+}
+
 bool Usuario::verificaSenha(const string &senha) const{
 	if (senha == this->senha)
 		return true;
