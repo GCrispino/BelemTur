@@ -26,7 +26,7 @@ public:
 	
 	void insereRua(const string &); //insere uma rua nova no vector das principais ruas do bairro.
 	void inserePonto(); //insere um objeto do tipo "Logradouro" no vector 'pontos'.
-	void mostrarPontos() const; //imprime todos os objetos contidos no vector 'pontos'.
+	bool mostrarPontos() const; //imprime todos os objetos contidos no vector 'pontos'.
 	const Logradouro* buscaPonto(const string &); //busca e retorna um determinado ponto buscado.
 	void mostraPrincipaisRuas() const; //imprime os valores do vector 'ruas'.
 

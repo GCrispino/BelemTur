@@ -84,15 +84,17 @@ void Cidade::insereBairro(const Bairro &B){
 	getch();
 }
 
-void Cidade::mostraBairros() const{
+bool Cidade::mostraBairros(){
 	if (this->bairros.empty()){
 		cout<<"Nao ha nenhum bairro cadastrado na cidade de "<<this->nome<<"! "<<endl;
 		getch();
+		return false;
 	}
 	else{
 		cout<<"Lista de bairros da cidade de "<<this->nome<<". "<<endl;
 		for (unsigned int i = 0;i < this->bairros.size();i++)
 			cout<<i + 1<<". "<<this->bairros[i].getNome()<<". "<<endl;
+		return true;
 	}
 }
 

@@ -32,7 +32,7 @@ public:
 	//void atualizaComentarios(const string &, const Bairro &);
 
 	void insereBairro(const Bairro &);
-	void mostraBairros() const;
+	bool mostraBairros();
 	Bairro * buscaBairro(const string &);
 	void buscaPonto(bool, const string &); //busca e retorna um determinado ponto buscado.
 	int calculaIdade(); //calcula a idade da cidade baseado na data do sistema

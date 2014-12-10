@@ -430,48 +430,52 @@ void Usuario::acessaPontos(Bairro &B){
 	int indice,opcao;
 	Logradouro *tmp;
 	
-	B.mostrarPontos();
+	if (!B.mostrarPontos())
+		return ;
+	else{
 	
-	cout<<endl<<"Caso deseje visualizar informacoes de um determinado ponto, digite o seu numero correspondente no indice"<<endl;
-	cout<<"Caso contrario, digite 0."<<endl;
-	cin >> indice;
-	
-		if (!indice)
-			return ;
-		else if (indice < 0 || indice - 1 >= B.getNPontos()){
-			cout<<"Valor invalido!"<<endl;
-			getch();
-			return ;
-		}
-		else{
-			do{
-				tmp = const_cast<Logradouro *>(B.getPonto(indice));
-				//cout<<this->pontos[nponto - 1]<<endl<<endl;
-				cout<<*tmp<<endl<<endl;
-				cout<<"Digite uma opcao: "<<endl;
-				cout<<"1. Fazer um comentario sobre o local: "<<endl;
-				cout<<"2. Visualizar todos os comentarios sobre o local: "<<endl;
-				cout<<"3. Voltar"<<endl;
+		cout<<endl<<"Caso deseje visualizar informacoes de um determinado ponto, digite o seu numero correspondente no indice"<<endl;
+		cout<<"Caso contrario, digite 0."<<endl;
+		cin >> indice;
+		
+			if (!indice)
+				return ;
+			else if (indice < 0 || indice - 1 >= B.getNPontos()){
+				cout<<"Valor invalido!"<<endl;
+				getch();
+				return ;
+			}
+			else{
+				do{
+					system("cls");
+					tmp = const_cast<Logradouro *>(B.getPonto(indice));
+					//cout<<this->pontos[nponto - 1]<<endl<<endl;
+					cout<<*tmp<<endl<<endl;
+					cout<<"Digite uma opcao: "<<endl;
+					cout<<"1. Fazer um comentario sobre o local: "<<endl;
+					cout<<"2. Visualizar todos os comentarios sobre o local: "<<endl;
+					cout<<"3. Voltar"<<endl;
+						
+					cin >> opcao;
 					
-				cin >> opcao;
-				
-				switch(opcao){
-					case 1:
-						this->comentar(tmp);
-						break;
-					case 2:
-						tmp->mostrarComentarios();
-						getch();
-						break;
-					case 3:
-						break;
-					default:
-						cout<<"Opcao invalida!"<<endl;
-						getch();
-						break;
-				}
-				B.setPonto(indice,*tmp);
-			}while(opcao != 3);
+					switch(opcao){
+						case 1:
+							this->comentar(tmp);
+							break;
+						case 2:
+							tmp->mostrarComentarios();
+							getch();
+							break;
+						case 3:
+							break;
+						default:
+							cout<<"Opcao invalida!"<<endl;
+							getch();
+							break;
+					}
+					B.setPonto(indice,*tmp);
+				}while(opcao != 3);
+		}
 	}
 }
 

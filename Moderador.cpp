@@ -21,7 +21,7 @@ Moderador::~Moderador()
 {
 }
 
-void Moderador::editarBairro(Bairro *B,vector<Usuario *> &usuarios){
+void Moderador::editarBairro(Bairro *B,vector<Pessoa *> &usuarios){
 	int opcao,nrua,nlocal,ncomentario;
 	float area;
 	string descricao,rua,nomebairro;
@@ -57,7 +57,7 @@ void Moderador::editarBairro(Bairro *B,vector<Usuario *> &usuarios){
 				}while(nomebairro == "Padrao");
 			
 				for (unsigned int i = 0;i < usuarios.size();i++)
-					usuarios[i]->atualizaNomeBairro(B->getNome(),nomebairro);
+					static_cast<Usuario *>(usuarios[i])->atualizaNomeBairro(B->getNome(),nomebairro);
 					
 				cout<<"Nome modificado de '"<<B->getNome()<<"' para '"<<nomebairro<<"'. "<<endl;
 				getch();
@@ -104,8 +104,8 @@ void Moderador::editarBairro(Bairro *B,vector<Usuario *> &usuarios){
 				B->setComentario(ncomentario,comentnovo);
 				
 				for (unsigned int i = 0;i < usuarios.size();i++) //atualiza com o texto novo os comentários de todos os usuários
-					if(usuarios[i]->getUsername() == comentantigo.getNomeUsuario())
-						this->editarComentario(*usuarios[i],comentantigo.getTexto(),comentnovo.getTexto());
+					if(static_cast<Usuario *>(usuarios[i])->getUsername() == comentantigo.getNomeUsuario())
+						this->editarComentario(*static_cast<Usuario *>(usuarios[i]),comentantigo.getTexto(),comentnovo.getTexto());
 						
 				getch();
 				break;
@@ -339,6 +339,63 @@ void Moderador::buscaPonto(Cidade &C,const string &nomeponto,vector<Pessoa *> &u
 	else{
 		cout<<"Local nao encontrado!"<<endl;
 		getch();
+	}
+}
+
+void Moderador::acessaPontos(Bairro &B, vector<Pessoa *> &usuarios){
+	int indice,opcao;
+	Logradouro *tmp;
+	
+	if (!B.mostrarPontos())
+		return ;
+	else{
+	
+		cout<<endl<<"Caso deseje visualizar informacoes de um determinado ponto, digite o seu numero correspondente no indice"<<endl;
+		cout<<"Caso contrario, digite 0."<<endl;
+		cin >> indice;
+		
+			if (!indice)
+				return ;
+			else if (indice < 0 || indice - 1 >= B.getNPontos()){
+				cout<<"Valor invalido!"<<endl;
+				getch();
+				return ;
+			}
+			else{
+				do{
+					system("cls");
+					tmp = const_cast<Logradouro *>(B.getPonto(indice));
+					//cout<<this->pontos[nponto - 1]<<endl<<endl;
+					cout<<*tmp<<endl<<endl;
+					cout<<"Digite uma opcao: "<<endl;
+					cout<<"1. Fazer um comentario sobre o local: "<<endl;
+					cout<<"2. Visualizar todos os comentarios sobre o local: "<<endl;
+					cout<<"3. Editar as informacoes sobre o local: "<<endl;
+					cout<<"4. Voltar"<<endl;
+						
+					cin >> opcao;
+					
+					switch(opcao){
+						case 1:
+							this->comentar(tmp);
+							break;
+						case 2:
+							tmp->mostrarComentarios();
+							getch();
+							break;
+						case 3:
+							this->editarPonto(*tmp,usuarios);
+							break;
+						case 4:
+							break;
+						default:
+							cout<<"Opcao invalida!"<<endl;
+							getch();
+							break;
+					}
+					B.setPonto(indice,*tmp);
+				}while(opcao != 4);
+		}
 	}
 }
 

@@ -16,8 +16,10 @@ public:
 	~Moderador();
 
 	//void cadastrar(const Cidade &);
-	void editarBairro(Bairro *,vector<Usuario *> &);
+	void editarBairro(Bairro *,vector<Pessoa *> &);
 	void editarPonto(Logradouro &,vector<Pessoa *> &);
+	//função que permite ao usuário visualizar e interagir com os pontos de um bairro .
+	void acessaPontos(Bairro &,vector <Pessoa *> &);
 	//busca determinado ponto cujo nome é passado como parametro e possibilita o usuário a executar diversas ações.
 	void buscaPonto(Cidade &,const string &,vector<Pessoa *> &);
 	void editarComentario(Comentario &);

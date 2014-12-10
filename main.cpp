@@ -74,11 +74,16 @@ int main(int argc, char **argv)
 								switch(opcaoprincipal){
 									case 1:
 										do{
-											C.mostraBairros();
-											cin >> opcaobairro;
-											if (opcaobairro < 0 || opcaobairro > C.getNBairros()){
-												cout<<"Opcao invalida!"<<endl;
-												getch();
+											if (C.mostraBairros()){
+												cin >> opcaobairro;
+												if (opcaobairro < 0 || opcaobairro > C.getNBairros()){
+													cout<<"Opcao invalida!"<<endl;
+													getch();
+												}
+											}
+											else{
+												opcaobairro = 0;
+												break;
 											}
 										}while(opcaobairro < 1 || opcaobairro > C.getNBairros());
 										if (!opcaobairro)
@@ -102,7 +107,11 @@ int main(int argc, char **argv)
 												case 1:
 													system("cls");
 													tmp = C.getBairro(opcaobairro);
-													static_cast<Usuario *>(usuarios[indiceusuario])->acessaPontos(tmp);
+													ptrM = dynamic_cast<Moderador *>(usuarios[indiceusuario]);
+													if (ptrM)
+														ptrM->acessaPontos(tmp,usuarios);
+													else
+														static_cast<Usuario *>(usuarios[indiceusuario])->acessaPontos(tmp);
 													//tmp.mostrarPontos();
 													//cin >> opcaobairrolocal;
 													//tmpponto = C.getBairro(opcaobairro).getPonto(opcaobairrolocal);
@@ -124,6 +133,16 @@ int main(int argc, char **argv)
 												case 4:
 													break;
 												case 5:
+													if (typeid(*usuarios[indiceusuario]) == typeid(Moderador)){
+														tmp = C.getBairro(opcaobairro);
+														static_cast<Moderador *>(usuarios[indiceusuario])->editarBairro(&tmp,usuarios);
+														
+														C.setBairro(opcaobairro,tmp);
+													}
+													else{
+														cout<<"Opcao invalida!"<<endl;
+														getch();
+													}
 													break;
 												default:
 													cout<<"Opcao invalida!"<<endl;

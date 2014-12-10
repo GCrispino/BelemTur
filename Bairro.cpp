@@ -149,10 +149,11 @@ void Bairro::inserePonto(){
 		this->pontos.push_back(Logradouro(nome,cep,rua,referencia,area,descricao));
 }
 
-void Bairro::mostrarPontos() const{
+bool Bairro::mostrarPontos() const{
 	if (this->pontos.empty()){
 		cout<<"Nao ha nenhum ponto registrado no bairro!"<<endl;
 		getch();
+		return false;
 	}
 	else{
 		cout<<"Pontos registrados no bairro "<<this->nome<<": "<<endl;
@@ -161,6 +162,7 @@ void Bairro::mostrarPontos() const{
 			cout<<i + 1<<". "<<this->pontos[i].getNome()<<endl;
 		getch();
 		
+		return true;
 	}
 }
 
