@@ -107,6 +107,7 @@ int main(int argc, char **argv)
 											switch(opcaomenubairro){
 												case 1:
 													cout<<C.getBairro(opcaobairro);
+													getch();
 													break;
 												case 2:
 													system("cls");

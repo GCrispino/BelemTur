@@ -3,7 +3,6 @@
 #include <iostream>
 #include <vector>
 #include "Localidade.h"
-//#include "Comentario.h"
 
 using namespace std;
 

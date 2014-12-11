@@ -94,25 +94,39 @@ void Moderador::editarBairro(Bairro *B,vector<Pessoa *> &usuarios){
 			case 4:
 				B->mostrarComentarios();
 				
-				cout<<"Digite o numero do comentario que deseja editar: "<<endl;
-				cin >> ncomentario;
-				
-				//modifica o comentario dentro do objeto B do tipo Bairro
-				comentantigo = B->getComentario(ncomentario);
-				comentnovo = comentantigo;
-				this->editarComentario(comentnovo);
-				B->setComentario(ncomentario,comentnovo);
-				
-				for (unsigned int i = 0;i < usuarios.size();i++) //atualiza com o texto novo os comentários de todos os usuários
-					if(static_cast<Usuario *>(usuarios[i])->getUsername() == comentantigo.getNomeUsuario())
-						this->editarComentario(*static_cast<Usuario *>(usuarios[i]),comentantigo.getTexto(),comentnovo.getTexto());
-						
-				getch();
+				if (B->getNComentarios()){
+					do{
+						cout<<"Digite o numero do comentario que deseja editar: "<<endl;
+						cin >> ncomentario;
+						if (ncomentario < 1 || ncomentario > B->getNComentarios()){
+							cout<<"Opcao invalida!!"<<endl;
+							getch();
+						}
+					}while(ncomentario < 1 || ncomentario > B->getNComentarios());
+					
+					//modifica o comentario dentro do objeto B do tipo Bairro
+					comentantigo = B->getComentario(ncomentario);
+					comentnovo = comentantigo;
+					this->editarComentario(comentnovo);
+					B->setComentario(ncomentario,comentnovo);
+					
+					for (unsigned int i = 0;i < usuarios.size();i++) //atualiza com o texto novo os comentários de todos os usuários
+						if(static_cast<Usuario *>(usuarios[i])->getUsername() == comentantigo.getNomeUsuario())
+							this->editarComentario(*static_cast<Usuario *>(usuarios[i]),comentantigo.getTexto(),comentnovo.getTexto());
+							
+					getch();
+				}
 				break;
 			case 5:
 				B->mostraPrincipaisRuas();
-				cout<<"Escolha o numero da rua que voce deseja editar: "<<endl;
-				cin >> nrua;
+				do{
+					cout<<"Escolha o numero da rua que voce deseja editar: "<<endl;
+					cin >> nrua;
+					if (nrua < 1 || nrua > B->getNRuas()){
+						cout<<"Opcao invalida!!"<<endl;
+						getch();
+					}
+				}while (nrua < 1 || nrua > B->getNRuas());
 				cout<<"Digite o novo nome da rua: "<<endl;
 				cin.sync();
 				getline(cin,rua);

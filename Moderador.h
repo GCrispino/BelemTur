@@ -14,8 +14,7 @@ public:
 	Moderador(const string &nome = "Padrao", char sexo = ' ', const string &cpf = "00000000000", const Data & = Data(1,1,1901), const string &username = "usuario1",const string &senha = "000000", const Bairro &bairrouser = Bairro());
 	Moderador(const Moderador &);
 	~Moderador();
-
-	//void cadastrar(const Cidade &);
+	
 	void editarBairro(Bairro *,vector<Pessoa *> &);
 	void editarPonto(Logradouro &,vector<Pessoa *> &);
 	//função que permite ao usuário visualizar e interagir com os pontos de um bairro .

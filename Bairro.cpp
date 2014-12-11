@@ -9,7 +9,7 @@ ostream &operator << (ostream &output, const Bairro &B){
 		output<<"Principais ruas: "<<endl;
 	
 		for (unsigned int i = 0;i < B.ruas.size();i++)
-		output<<B.ruas[i];
+		output<<B.ruas[i]<<endl;
 	}
 	
 	return output;
@@ -31,6 +31,10 @@ Bairro::Bairro(const Bairro &B)
 
 Bairro::~Bairro()
 {
+}
+
+int Bairro::getNRuas() const{
+	return this->ruas.size();
 }
 
 void Bairro::setRua(int indice,const string &rua){
@@ -132,9 +136,11 @@ void Bairro::inserePonto(){
 		}
 		else{
 			cep = Logradouro::validaCEP(cep);
+			loop = false;
 			if (cep == "00000000"){
 				cout<<"CEP invalido! Caso nao saiba o CEP, defina o CEP do local como 0."<<endl;
 				getch();
+				loop = true;
 			}
 		}
 	}while(loop);

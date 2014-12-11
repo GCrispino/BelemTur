@@ -5,20 +5,20 @@
 ## Debug
 ProjectName            :=BelemTur
 ConfigurationName      :=Debug
-WorkspacePath          := "C:\workspace"
-ProjectPath            := "C:\Users\LAB4-PC01\git\BelemTur"
+WorkspacePath          := "C:\Users\Crispino\Documents\ProgII"
+ProjectPath            := "C:\Users\Crispino\Documents\ProgII\BelemTur"
 IntermediateDirectory  :=./Debug
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
-User                   :=LAB4-PC01
-Date                   :=10/12/2014
-CodeLitePath           :="C:\Program Files\CodeLite"
-LinkerName             :=g++
-SharedObjectLinkerName :=g++ -shared -fPIC
+User                   :=Crispino
+Date                   :=12/10/14
+CodeLitePath           :="C:\Program Files (x86)\CodeLite"
+LinkerName             :=C:/MinGW-4.8.1/bin/g++.exe 
+SharedObjectLinkerName :=C:/MinGW-4.8.1/bin/g++.exe -shared -fPIC
 ObjectSuffix           :=.o
-DependSuffix           :=
+DependSuffix           :=.o.d
 PreprocessSuffix       :=.i
 DebugSwitch            :=-g 
 IncludeSwitch          :=-I
@@ -36,7 +36,7 @@ ObjectsFileList        :="BelemTur.txt"
 PCHCompileFlags        :=
 MakeDirCommand         :=makedir
 RcCmpOptions           := 
-RcCompilerName         :=windres
+RcCompilerName         :=C:/MinGW-4.8.1/bin/windres.exe 
 LinkOptions            :=  
 IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). 
 IncludePCH             := 
@@ -47,22 +47,24 @@ LibPath                := $(LibraryPathSwitch).
 
 ##
 ## Common variables
-## AR, CXX, CC, CXXFLAGS and CFLAGS can be overriden using an environment variables
+## AR, CXX, CC, AS, CXXFLAGS and CFLAGS can be overriden using an environment variables
 ##
-AR       := ar rcu
-CXX      := g++
-CC       := gcc
+AR       := C:/MinGW-4.8.1/bin/ar.exe rcu
+CXX      := C:/MinGW-4.8.1/bin/g++.exe 
+CC       := C:/MinGW-4.8.1/bin/gcc.exe 
 CXXFLAGS :=  -g -O0 -Wall $(Preprocessors)
 CFLAGS   :=  -g -O0 -Wall $(Preprocessors)
+ASFLAGS  := 
+AS       := C:/MinGW-4.8.1/bin/as.exe 
 
 
 ##
 ## User defined environment variables
 ##
-CodeLiteDir:=C:\Program Files\CodeLite
+CodeLiteDir:=C:\Program Files (x86)\CodeLite
 UNIT_TEST_PP_SRC_DIR:=C:\UnitTest++-1.3
-Objects0=$(IntermediateDirectory)/main$(ObjectSuffix) $(IntermediateDirectory)/Localidade$(ObjectSuffix) $(IntermediateDirectory)/Cidade$(ObjectSuffix) $(IntermediateDirectory)/Bairro$(ObjectSuffix) $(IntermediateDirectory)/Data$(ObjectSuffix) $(IntermediateDirectory)/Logradouro$(ObjectSuffix) $(IntermediateDirectory)/Comentario$(ObjectSuffix) $(IntermediateDirectory)/Pessoa$(ObjectSuffix) $(IntermediateDirectory)/Usuario$(ObjectSuffix) $(IntermediateDirectory)/Moderador$(ObjectSuffix) \
-	$(IntermediateDirectory)/stringDigitos$(ObjectSuffix) $(IntermediateDirectory)/PontoTuristico$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/Localidade.cpp$(ObjectSuffix) $(IntermediateDirectory)/Cidade.cpp$(ObjectSuffix) $(IntermediateDirectory)/Bairro.cpp$(ObjectSuffix) $(IntermediateDirectory)/Data.cpp$(ObjectSuffix) $(IntermediateDirectory)/Logradouro.cpp$(ObjectSuffix) $(IntermediateDirectory)/Comentario.cpp$(ObjectSuffix) $(IntermediateDirectory)/Pessoa.cpp$(ObjectSuffix) $(IntermediateDirectory)/Usuario.cpp$(ObjectSuffix) $(IntermediateDirectory)/Moderador.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/stringDigitos.cpp$(ObjectSuffix) $(IntermediateDirectory)/PontoTuristico.cpp$(ObjectSuffix) 
 
 
 
@@ -89,108 +91,112 @@ PreBuild:
 ##
 ## Objects
 ##
-$(IntermediateDirectory)/main$(ObjectSuffix): main.cpp 
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/LAB4-PC01/git/BelemTur/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/main$(PreprocessSuffix): main.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/main$(PreprocessSuffix) "main.cpp"
+$(IntermediateDirectory)/main.cpp$(ObjectSuffix): main.cpp $(IntermediateDirectory)/main.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Crispino/Documents/ProgII/BelemTur/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/main.cpp$(DependSuffix): main.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/main.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/main.cpp$(DependSuffix) -MM "main.cpp"
 
-$(IntermediateDirectory)/Localidade$(ObjectSuffix): Localidade.cpp 
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/LAB4-PC01/git/BelemTur/Localidade.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Localidade$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/Localidade$(PreprocessSuffix): Localidade.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Localidade$(PreprocessSuffix) "Localidade.cpp"
+$(IntermediateDirectory)/main.cpp$(PreprocessSuffix): main.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/main.cpp$(PreprocessSuffix) "main.cpp"
 
-$(IntermediateDirectory)/Cidade$(ObjectSuffix): Cidade.cpp 
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/LAB4-PC01/git/BelemTur/Cidade.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Cidade$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/Cidade$(PreprocessSuffix): Cidade.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Cidade$(PreprocessSuffix) "Cidade.cpp"
+$(IntermediateDirectory)/Localidade.cpp$(ObjectSuffix): Localidade.cpp $(IntermediateDirectory)/Localidade.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Crispino/Documents/ProgII/BelemTur/Localidade.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Localidade.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Localidade.cpp$(DependSuffix): Localidade.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Localidade.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Localidade.cpp$(DependSuffix) -MM "Localidade.cpp"
 
-$(IntermediateDirectory)/Bairro$(ObjectSuffix): Bairro.cpp 
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/LAB4-PC01/git/BelemTur/Bairro.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Bairro$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/Bairro$(PreprocessSuffix): Bairro.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Bairro$(PreprocessSuffix) "Bairro.cpp"
+$(IntermediateDirectory)/Localidade.cpp$(PreprocessSuffix): Localidade.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Localidade.cpp$(PreprocessSuffix) "Localidade.cpp"
 
-$(IntermediateDirectory)/Data$(ObjectSuffix): Data.cpp 
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/LAB4-PC01/git/BelemTur/Data.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Data$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/Data$(PreprocessSuffix): Data.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Data$(PreprocessSuffix) "Data.cpp"
+$(IntermediateDirectory)/Cidade.cpp$(ObjectSuffix): Cidade.cpp $(IntermediateDirectory)/Cidade.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Crispino/Documents/ProgII/BelemTur/Cidade.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Cidade.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Cidade.cpp$(DependSuffix): Cidade.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Cidade.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Cidade.cpp$(DependSuffix) -MM "Cidade.cpp"
 
-$(IntermediateDirectory)/Logradouro$(ObjectSuffix): Logradouro.cpp 
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/LAB4-PC01/git/BelemTur/Logradouro.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Logradouro$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/Logradouro$(PreprocessSuffix): Logradouro.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Logradouro$(PreprocessSuffix) "Logradouro.cpp"
+$(IntermediateDirectory)/Cidade.cpp$(PreprocessSuffix): Cidade.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Cidade.cpp$(PreprocessSuffix) "Cidade.cpp"
 
-$(IntermediateDirectory)/Comentario$(ObjectSuffix): Comentario.cpp 
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/LAB4-PC01/git/BelemTur/Comentario.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Comentario$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/Comentario$(PreprocessSuffix): Comentario.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Comentario$(PreprocessSuffix) "Comentario.cpp"
+$(IntermediateDirectory)/Bairro.cpp$(ObjectSuffix): Bairro.cpp $(IntermediateDirectory)/Bairro.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Crispino/Documents/ProgII/BelemTur/Bairro.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Bairro.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Bairro.cpp$(DependSuffix): Bairro.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Bairro.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Bairro.cpp$(DependSuffix) -MM "Bairro.cpp"
 
-$(IntermediateDirectory)/Pessoa$(ObjectSuffix): Pessoa.cpp 
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/LAB4-PC01/git/BelemTur/Pessoa.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Pessoa$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/Pessoa$(PreprocessSuffix): Pessoa.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Pessoa$(PreprocessSuffix) "Pessoa.cpp"
+$(IntermediateDirectory)/Bairro.cpp$(PreprocessSuffix): Bairro.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Bairro.cpp$(PreprocessSuffix) "Bairro.cpp"
 
-$(IntermediateDirectory)/Usuario$(ObjectSuffix): Usuario.cpp 
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/LAB4-PC01/git/BelemTur/Usuario.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Usuario$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/Usuario$(PreprocessSuffix): Usuario.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Usuario$(PreprocessSuffix) "Usuario.cpp"
+$(IntermediateDirectory)/Data.cpp$(ObjectSuffix): Data.cpp $(IntermediateDirectory)/Data.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Crispino/Documents/ProgII/BelemTur/Data.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Data.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Data.cpp$(DependSuffix): Data.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Data.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Data.cpp$(DependSuffix) -MM "Data.cpp"
 
-$(IntermediateDirectory)/Moderador$(ObjectSuffix): Moderador.cpp 
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/LAB4-PC01/git/BelemTur/Moderador.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Moderador$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/Moderador$(PreprocessSuffix): Moderador.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Moderador$(PreprocessSuffix) "Moderador.cpp"
+$(IntermediateDirectory)/Data.cpp$(PreprocessSuffix): Data.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Data.cpp$(PreprocessSuffix) "Data.cpp"
 
-$(IntermediateDirectory)/stringDigitos$(ObjectSuffix): stringDigitos.cpp 
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/LAB4-PC01/git/BelemTur/stringDigitos.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/stringDigitos$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/stringDigitos$(PreprocessSuffix): stringDigitos.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/stringDigitos$(PreprocessSuffix) "stringDigitos.cpp"
+$(IntermediateDirectory)/Logradouro.cpp$(ObjectSuffix): Logradouro.cpp $(IntermediateDirectory)/Logradouro.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Crispino/Documents/ProgII/BelemTur/Logradouro.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Logradouro.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Logradouro.cpp$(DependSuffix): Logradouro.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Logradouro.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Logradouro.cpp$(DependSuffix) -MM "Logradouro.cpp"
 
-$(IntermediateDirectory)/PontoTuristico$(ObjectSuffix): PontoTuristico.cpp 
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/LAB4-PC01/git/BelemTur/PontoTuristico.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/PontoTuristico$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/PontoTuristico$(PreprocessSuffix): PontoTuristico.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/PontoTuristico$(PreprocessSuffix) "PontoTuristico.cpp"
+$(IntermediateDirectory)/Logradouro.cpp$(PreprocessSuffix): Logradouro.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Logradouro.cpp$(PreprocessSuffix) "Logradouro.cpp"
 
+$(IntermediateDirectory)/Comentario.cpp$(ObjectSuffix): Comentario.cpp $(IntermediateDirectory)/Comentario.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Crispino/Documents/ProgII/BelemTur/Comentario.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Comentario.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Comentario.cpp$(DependSuffix): Comentario.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Comentario.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Comentario.cpp$(DependSuffix) -MM "Comentario.cpp"
+
+$(IntermediateDirectory)/Comentario.cpp$(PreprocessSuffix): Comentario.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Comentario.cpp$(PreprocessSuffix) "Comentario.cpp"
+
+$(IntermediateDirectory)/Pessoa.cpp$(ObjectSuffix): Pessoa.cpp $(IntermediateDirectory)/Pessoa.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Crispino/Documents/ProgII/BelemTur/Pessoa.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Pessoa.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Pessoa.cpp$(DependSuffix): Pessoa.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Pessoa.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Pessoa.cpp$(DependSuffix) -MM "Pessoa.cpp"
+
+$(IntermediateDirectory)/Pessoa.cpp$(PreprocessSuffix): Pessoa.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Pessoa.cpp$(PreprocessSuffix) "Pessoa.cpp"
+
+$(IntermediateDirectory)/Usuario.cpp$(ObjectSuffix): Usuario.cpp $(IntermediateDirectory)/Usuario.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Crispino/Documents/ProgII/BelemTur/Usuario.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Usuario.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Usuario.cpp$(DependSuffix): Usuario.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Usuario.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Usuario.cpp$(DependSuffix) -MM "Usuario.cpp"
+
+$(IntermediateDirectory)/Usuario.cpp$(PreprocessSuffix): Usuario.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Usuario.cpp$(PreprocessSuffix) "Usuario.cpp"
+
+$(IntermediateDirectory)/Moderador.cpp$(ObjectSuffix): Moderador.cpp $(IntermediateDirectory)/Moderador.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Crispino/Documents/ProgII/BelemTur/Moderador.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Moderador.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Moderador.cpp$(DependSuffix): Moderador.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Moderador.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Moderador.cpp$(DependSuffix) -MM "Moderador.cpp"
+
+$(IntermediateDirectory)/Moderador.cpp$(PreprocessSuffix): Moderador.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Moderador.cpp$(PreprocessSuffix) "Moderador.cpp"
+
+$(IntermediateDirectory)/stringDigitos.cpp$(ObjectSuffix): stringDigitos.cpp $(IntermediateDirectory)/stringDigitos.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Crispino/Documents/ProgII/BelemTur/stringDigitos.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/stringDigitos.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/stringDigitos.cpp$(DependSuffix): stringDigitos.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/stringDigitos.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/stringDigitos.cpp$(DependSuffix) -MM "stringDigitos.cpp"
+
+$(IntermediateDirectory)/stringDigitos.cpp$(PreprocessSuffix): stringDigitos.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/stringDigitos.cpp$(PreprocessSuffix) "stringDigitos.cpp"
+
+$(IntermediateDirectory)/PontoTuristico.cpp$(ObjectSuffix): PontoTuristico.cpp $(IntermediateDirectory)/PontoTuristico.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Crispino/Documents/ProgII/BelemTur/PontoTuristico.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/PontoTuristico.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/PontoTuristico.cpp$(DependSuffix): PontoTuristico.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/PontoTuristico.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/PontoTuristico.cpp$(DependSuffix) -MM "PontoTuristico.cpp"
+
+$(IntermediateDirectory)/PontoTuristico.cpp$(PreprocessSuffix): PontoTuristico.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/PontoTuristico.cpp$(PreprocessSuffix) "PontoTuristico.cpp"
+
+
+-include $(IntermediateDirectory)/*$(DependSuffix)
 ##
 ## Clean
 ##
 clean:
-	$(RM) $(IntermediateDirectory)/main$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/main$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/main$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/Localidade$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/Localidade$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/Localidade$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/Cidade$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/Cidade$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/Cidade$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/Bairro$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/Bairro$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/Bairro$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/Data$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/Data$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/Data$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/Logradouro$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/Logradouro$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/Logradouro$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/Comentario$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/Comentario$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/Comentario$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/Pessoa$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/Pessoa$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/Pessoa$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/Usuario$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/Usuario$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/Usuario$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/Moderador$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/Moderador$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/Moderador$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/stringDigitos$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/stringDigitos$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/stringDigitos$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/PontoTuristico$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/PontoTuristico$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/PontoTuristico$(PreprocessSuffix)
+	$(RM) ./Debug/*$(ObjectSuffix)
+	$(RM) ./Debug/*$(DependSuffix)
 	$(RM) $(OutputFile)
 	$(RM) $(OutputFile).exe
-	$(RM) "../../../../workspace/.build-debug/BelemTur"
+	$(RM) "../.build-debug/BelemTur"
 
 

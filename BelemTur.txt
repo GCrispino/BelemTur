@@ -1,1 +1,1 @@
-./Debug/main.o ./Debug/Localidade.o ./Debug/Cidade.o ./Debug/Bairro.o ./Debug/Data.o ./Debug/Logradouro.o ./Debug/Comentario.o ./Debug/Pessoa.o ./Debug/Usuario.o ./Debug/Moderador.o  ./Debug/stringDigitos.o ./Debug/PontoTuristico.o   
+./Debug/main.cpp.o ./Debug/Localidade.cpp.o ./Debug/Cidade.cpp.o ./Debug/Bairro.cpp.o ./Debug/Data.cpp.o ./Debug/Logradouro.cpp.o ./Debug/Comentario.cpp.o ./Debug/Pessoa.cpp.o ./Debug/Usuario.cpp.o ./Debug/Moderador.cpp.o ./Debug/stringDigitos.cpp.o ./Debug/PontoTuristico.cpp.o   
