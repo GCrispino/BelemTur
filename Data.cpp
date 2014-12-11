@@ -45,6 +45,11 @@ Data::Data(int d, int m, int a)
 
 }
 
+Data::Data(const Data &D){
+	this->dia = D.dia;
+	this->mes = D.mes;
+	this->ano = D.ano;
+}
 
 int Data::getDia(){
 	return this->dia;
@@ -87,4 +92,12 @@ Data Data::getDataAtual() {
 	Data D(dia,mes,ano);
 	
 	return D;
+}
+
+Data Data::operator +=(const Data &D){
+	this->dia += D.dia;
+	this->mes += D.mes;
+	this->ano += D.ano;
+	
+	return *this;
 }

@@ -21,7 +21,7 @@ Bairro::Bairro(const string &nome, float area,string descricao)
 }
 
 Bairro::Bairro(float area)
-:Localidade("Cidade",area){}
+:Localidade("Bairro",area){}
 
 Bairro::Bairro(const Bairro &B)
 :Localidade(B){

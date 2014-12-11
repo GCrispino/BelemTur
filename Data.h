@@ -20,6 +20,7 @@ friend bool operator == (Data &, Data &);
 public:
     
     Data( int = 1, int = 1, int = 1900 );
+	Data(const Data &);
 	
 	int getDia();
 	int getMes();

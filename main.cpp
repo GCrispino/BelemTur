@@ -26,13 +26,11 @@ int main(int argc, char **argv)
 	//Cidade C("Belem",1432844,1065,Data(6,12,1616),descricao);
 	Cidade C = leArquivoCidade();
 	Bairro *ptrBairro,*tmpbairro,tmp;
-	Logradouro *tmplocal;
 	const Logradouro *tmpponto;
 	vector <Pessoa *> usuarios;
 	int opcaologin,opcaoprincipal,opcaolocal,opcaobairro,opcaobairrolocal,opcaomenubairro,indiceusuario,nruas;
-	float areabairro,arealocal;
+	float areabairro;
 	string username,senha,nomebairro,nomelocal,descricao,rua;
-	bool usuario;
 	
 	Usuario *ptrU = new Usuario("Joao",'m',"12345675895",Data(1,1,2001),"joaozinho123","360HD3D"),*ptrTempU;
 	Moderador *ptrM;
