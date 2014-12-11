@@ -4,6 +4,8 @@
 #include <cstdlib>
 #include <typeinfo>
 #include <conio.h>
+#include <stdexcept>
+#include <string>
 #include <windows.h>
 #include "Moderador.h"
 #include "Cidade.h"
@@ -21,6 +23,7 @@ int buscaUsername(const string &,const vector<Pessoa*> &);
 Cidade leArquivoCidade();
 void desaloca(vector<Pessoa *> &);
 
+string getSenha(const string &);
 int main(int argc, char **argv)
 {
 	//Cidade C("Belem",1432844,1065,Data(6,12,1616),descricao);
@@ -57,8 +60,8 @@ int main(int argc, char **argv)
 						getch();
 					}
 					else{
-						cout<<"Digite a sua senha: "<<endl;
-						cin >> senha;
+						senha = getSenha("Digite a sua senha: ");
+						cout<<endl;
 						if (static_cast<Usuario*>(usuarios[indiceusuario])->verificaSenha(senha)){
 							cout<<"Fazendo login..."<<endl;
 							for (int i = 0;i < 5;i++){
@@ -423,8 +426,37 @@ Cidade leArquivoCidade(){
 	return Cidade(nome,nhabitantes,area,fundacao,descricao);
 }
 
-void desaloca(vector<Pessoa *> &usuarios){
-	for (unsigned int i = 0;i < usuarios.size();i++)
-		delete usuarios[i];
-}
+string getSenha( const string& prompt = "Enter password> " ){
+	string result;
 
+	// Set the console mode to no-echo, not-line-buffered input
+	DWORD mode, count;
+  	HANDLE ih = GetStdHandle( STD_INPUT_HANDLE  );
+	HANDLE oh = GetStdHandle( STD_OUTPUT_HANDLE );
+	if (!GetConsoleMode( ih, &mode ))
+	    throw runtime_error(
+	      "getpassword: You must be connected to a console to use this program.\n"
+	    );
+	SetConsoleMode( ih, mode & ~(ENABLE_ECHO_INPUT | ENABLE_LINE_INPUT) );
+	
+	// Get the password string
+	WriteConsoleA( oh, prompt.c_str(), prompt.length(), &count, NULL );
+	char c;
+	while (ReadConsoleA( ih, &c, 1, &count, NULL) && (c != '\r') && (c != '\n')){
+		if (c == '\b'){
+	    	if (result.length()){
+	        	WriteConsoleA( oh, "\b \b", 3, &count, NULL );
+	        	result.erase( result.end() -1 );
+	    	}
+	    }
+	    else{
+	    		WriteConsoleA( oh, "*", 1, &count, NULL );
+	    		result.push_back( c );
+	    }
+	}
+	
+	  // Restore the console mode
+	  SetConsoleMode( ih, mode );
+	
+	  return result;
+}
